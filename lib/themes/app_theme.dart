@@ -13,7 +13,7 @@ class AppTheme {
       elevation: 2,
     ),
     
-    scaffoldBackgroundColor: const Color.fromARGB(255, 251, 240, 255),
+    scaffoldBackgroundColor: const Color.fromARGB(255, 253, 247, 255),
     
     iconTheme: const IconThemeData(
       color: primaryColor,

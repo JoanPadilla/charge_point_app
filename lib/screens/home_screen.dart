@@ -1,8 +1,12 @@
+import 'dart:async';
+
+import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/widgets/custom_side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -16,37 +20,53 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Home screen'),
       ),
       drawer: const CustomSideMenu(),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          
+          //TODO: El mapa moviment del mapa entra en conflicte amb el moviment del scroll, igual hi ha que desanidar-los
+          const _CustomMap(),
+          const Divider(
+          thickness: 1,
+          height: 1,
+          color: Color.fromARGB(255, 198, 163, 221),
+        ),
+          
+          Expanded(
+            child: ListView(
+              children: [
+                const SizedBox(height: 25,),
             
-            //TODO: El mapa moviment del mapa entra en conflicte amb el moviment del scroll, igual hi ha que desanidar-los
-            const _CustomMap(),
-            
-            const SizedBox(height: 25,),
-            
-            Row(
-              children: const [
-                SizedBox(width: 30,),
-                
-                Text(
-                  'Cargadores disponibles',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700
-                  ),
+                Row(
+                  children: [
+                    const SizedBox(width: 30,),
+                    
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Cargadores disponibles',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700
+                          ),
+                        ),
+                        
+                        Container(height: 4, width: 170, color: AppTheme.primaryColor,),
+                      ],
+                    ),
+                  ],
                 ),
+                
+                const SizedBox(height: 10,),
+                const _CustomTable(),
               ],
             ),
-            
-            const SizedBox(height: 25,),
-            const _CustomTable()
-            
-            
-          ],
-        ),
+          ),
+          
+          
+        ],
       ),
     );
   }
@@ -60,36 +80,24 @@ class _CustomMap extends StatefulWidget {
 }
 
 class _CustomMapState extends State<_CustomMap> {
-  late String _mapStyle;
-  GoogleMapController? mapController ;
-  
-  @override
-  void initState() {
-  super.initState();
 
-  rootBundle.loadString('assets/map_style.txt').then((string) {
-    _mapStyle = string;
-  });
-}
+  final Completer<GoogleMapController> _mapController = Completer();
   
   @override
   Widget build(BuildContext context) {
     
-    const CameraPosition initialPosition = CameraPosition(
-      target: LatLng(39.994427, -0.068448),
-      zoom: 17,
-      tilt: 2
-    );
+    final mapProvider = Provider.of<MapProvider>(context);
     
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 2,
+      height: MediaQuery.of(context).size.height / 7 * 3,
       child: GoogleMap(
         zoomControlsEnabled: false,
         mapType: MapType.normal,
-        initialCameraPosition: initialPosition,
+        markers: mapProvider.markers,
+        initialCameraPosition: mapProvider.initialPosition,
         onMapCreated: (GoogleMapController controller) {
-          mapController = controller;
-          mapController!.setMapStyle(_mapStyle);
+          controller.setMapStyle(mapProvider.mapStyle);
+          _mapController.complete(controller);
         } ,
       ),
     );
