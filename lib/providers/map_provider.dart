@@ -17,6 +17,7 @@ class MapProvider extends ChangeNotifier{
   String? mapStyle;
   Uint8List? markerIconAvailable;
   Uint8List? markerIconUnavailable;
+  bool loading = true;
   
   MapProvider() {
     rootBundle.loadString('assets/map_style2.txt').then((string) {
@@ -29,6 +30,7 @@ class MapProvider extends ChangeNotifier{
   void _init() async {
     await _loadMarkersIcon();
     await _addInitialMarkers();
+    loading = false;
     notifyListeners();
   }
   

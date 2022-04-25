@@ -4,7 +4,6 @@ import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/widgets/custom_side_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +23,6 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           
-          //TODO: El mapa moviment del mapa entra en conflicte amb el moviment del scroll, igual hi ha que desanidar-los
           const _CustomMap(),
           const Divider(
           thickness: 1,
@@ -90,7 +88,8 @@ class _CustomMapState extends State<_CustomMap> {
     
     return SizedBox(
       height: MediaQuery.of(context).size.height / 7 * 3,
-      child: GoogleMap(
+      child: mapProvider.loading ? const CircularProgressIndicator.adaptive() : 
+      GoogleMap(
         zoomControlsEnabled: false,
         mapType: MapType.normal,
         markers: mapProvider.markers,
@@ -117,23 +116,30 @@ class _CustomTable extends StatelessWidget {
       children: const [
         TableRow(
           children: [
-            _ChargePointButton(),
-            _ChargePointButton(),
-            _ChargePointButton(),
+            _ChargePointButton(available: true, name: 'P1',),
+            _ChargePointButton(available: true, name: 'P2',),
+            _ChargePointButton(available: false, name: 'P3',),
           ]
         ),
         TableRow(
           children: [
-            _ChargePointButton(),
-            _ChargePointButton(),
-            _ChargePointButton(),
+            _ChargePointButton(available: false, name: 'P4',),
+            _ChargePointButton(available: false, name: 'P5',),
+            _ChargePointButton(available: true, name: 'P6',),
           ]
         ),
         TableRow(
           children: [
-            _ChargePointButton(),
-            _ChargePointButton(),
-            _ChargePointButton(),
+            _ChargePointButton(available: false, name: 'P7',),
+            _ChargePointButton(available: true, name: 'P8',),
+            _ChargePointButton(available: true, name: 'P9',),
+          ]
+        ),
+        TableRow(
+          children: [
+            _ChargePointButton(available: true, name: 'P10',),
+            _ChargePointButton(available: false, name: 'P11',),
+            _ChargePointButton(available: true, name: 'P12',),
           ]
         ),
       ],
@@ -142,24 +148,50 @@ class _CustomTable extends StatelessWidget {
 }
 
 class _ChargePointButton extends StatelessWidget {
+  
+  final bool available;
+  final String name;
+  
   const _ChargePointButton({
     Key? key,
+    required this.available,
+    required this.name,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 50,
-      margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          color: AppTheme.primaryColor,
-          height: 70,
-          width: 70,
-          child: const Align(
-            alignment: Alignment.center,
-            child: Text('P1', style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold))),
+      margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+      
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 11,
+          primary: Colors.transparent,
+          onPrimary: Colors.white,
+          padding: const EdgeInsets.all(0.0),
+          shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20)))
+        ),
+        onPressed: available ? () {} : null,
+        child: Ink(
+            decoration: BoxDecoration(
+            gradient: available ? const LinearGradient(
+              colors: [
+                Color.fromARGB(255, 189, 164, 206),
+                AppTheme.primaryColor,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.centerRight,
+                stops: [0.05,0.5],
+              ) : null,
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+          ),
+          child: SizedBox(
+            height: 70,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(name, style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold))),
+          ),
         ),
       ),
     );
