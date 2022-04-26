@@ -14,8 +14,14 @@ class AppRoutes {
     MenuOption(route: 'settings', icon: Icons.settings, name: 'Ajustes', screen: const SettingsScreen()),
   ];
   
+  static final Map<String, Widget Function(BuildContext)> secondaryRoutes = {
+    'charge_point' : ( _ ) => const ChargePointScreen(),
+  };
+  
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {
     Map<String, Widget Function(BuildContext)> appRoutes = {};
+    appRoutes.addAll(secondaryRoutes);
+    
     for (final option in menuOptions) {
       appRoutes.addAll({option.route : ( _ ) => option.screen});
     }
