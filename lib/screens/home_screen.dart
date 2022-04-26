@@ -32,6 +32,7 @@ class HomeScreen extends StatelessWidget {
           
           Expanded(
             child: ListView(
+
               children: [
                 const SizedBox(height: 25,),
             
@@ -88,8 +89,13 @@ class _CustomMapState extends State<_CustomMap> {
     
     return SizedBox(
       height: MediaQuery.of(context).size.height / 7 * 3,
-      child: mapProvider.loading ? const CircularProgressIndicator.adaptive() : 
-      GoogleMap(
+      width: double.infinity,
+      child: mapProvider.loading
+      ? const Padding(
+        padding:  EdgeInsets.all(50.0),
+        child:  CircularProgressIndicator.adaptive(),
+      ) 
+      : GoogleMap(
         zoomControlsEnabled: false,
         mapType: MapType.normal,
         markers: mapProvider.markers,
@@ -182,7 +188,7 @@ class _ChargePointButton extends StatelessWidget {
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.centerRight,
-                stops: [0.05,0.5],
+                stops: [0.05,0.45],
               ) : null,
             borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
@@ -190,7 +196,7 @@ class _ChargePointButton extends StatelessWidget {
             height: 70,
             child: Align(
               alignment: Alignment.center,
-              child: Text(name, style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold))),
+              child: Text(name, style: const TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold))),
           ),
         ),
       ),
