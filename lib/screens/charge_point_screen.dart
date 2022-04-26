@@ -21,6 +21,22 @@ class ChargePointScreen extends StatelessWidget {
         child: Icon(Icons.arrow_back),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
+      body: Container(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            Text('Punto de carga:  P1'),
+            Text(
+              'Disponible',
+              style: TextStyle(
+                color: Colors.green,
+                
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
