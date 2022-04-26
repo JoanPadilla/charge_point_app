@@ -62,9 +62,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
   #   - images/a_dot_burr.jpeg
-    - assets/map_style.txt
-    - assets/map_style2.txt
-    - assets/electricity_full_icon.png
+    - assets/
+    # - assets/map_style.txt
+    # - assets/map_style2.txt
+    # - assets/electricity_full_icon.png
+    # - assets/foto_cargador.webp
     - assets/markers/
 
   # An image asset can refer to one or more resolution-specific "variants", see

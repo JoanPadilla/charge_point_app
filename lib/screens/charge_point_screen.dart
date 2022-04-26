@@ -1,3 +1,4 @@
+import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
 
@@ -6,10 +7,20 @@ class ChargePointScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BackButton()
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 180,
+        automaticallyImplyLeading: false,
+        flexibleSpace: const Image(image: AssetImage('assets/foto_cargador.webp'), fit: BoxFit.cover,),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        backgroundColor: AppTheme.primaryColor,
+        child: Icon(Icons.arrow_back),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
     );
   }
 }

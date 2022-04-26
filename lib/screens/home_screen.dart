@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-
+//TODO: separar clase
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   
@@ -178,7 +178,9 @@ class _ChargePointButton extends StatelessWidget {
           padding: const EdgeInsets.all(0.0),
           shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20)))
         ),
-        onPressed: available ? () {} : null,
+        onPressed: !available ? null : () {
+          Navigator.pushNamed(context, 'charge_point');
+        },
         child: Ink(
             decoration: BoxDecoration(
             gradient: available ? const LinearGradient(
