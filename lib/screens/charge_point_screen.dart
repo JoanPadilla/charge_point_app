@@ -1,5 +1,6 @@
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class ChargePointScreen extends StatelessWidget {
@@ -36,28 +37,26 @@ class ChargePointScreen extends StatelessWidget {
                 ],
               ),
               
-              const SizedBox(height: 150),
+              const SizedBox(height: 15),
               
-              Center(
-                child: Container(
-                  width: 270,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    shape:BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(10),
-                    // boxShadow: const [
-                    //   BoxShadow(blurRadius: 4, offset: Offset(2, 2))
-                    // ]
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Disponible',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                      ),
+              Container(
+                width: 160,
+                height: 35,
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  shape:BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(10),
+                  // boxShadow: const [
+                  //   BoxShadow(blurRadius: 4, offset: Offset(2, 2))
+                  // ]
+                ),
+                child: const Center(
+                  child: Text(
+                    'Disponible',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
                     ),
                   ),
                 ),
@@ -120,16 +119,17 @@ class _ButtonSection extends StatelessWidget {
           SizedBox(
             child: TextButton(
               style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
-              onPressed: () {},
+              onPressed: () {
+                //TODO: Implementar mensaje de noImplemented
+              },
               child: const _CustomButton(text: 'BOOK', icon: Icons.book_outlined,),
             ),
           ),
           const VerticalDivider(color: Colors.white, indent: 8, endIndent: 8),
           TextButton(
             style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
-            onPressed: () async {
-              double lat = 0;
-              double lon = 0;
+            onPressed: () {
+              _launchMapsUrl(39.992403, -0.069522);
             },
             child: const _CustomButton(text: 'ROUTE', icon: Icons.map_outlined,),
           ),
@@ -139,16 +139,15 @@ class _ButtonSection extends StatelessWidget {
   }
   
   //TODO: transportar a service
-  // void _launchMapsUrl(double lat, double lon) async {
-  //   final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lon';
-  //   if (await canLaunch(url)) {
-  //     await launch(url);
-  //   } else {
-  //     throw 'Could not launch $url';
-  //   }
-  // }
+  void _launchMapsUrl(double lat, double lon) async {
+    final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lon'; 
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }
-
 
 class _CustomButton extends StatelessWidget {
   
