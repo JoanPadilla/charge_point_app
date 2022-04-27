@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
-import 'package:charge_point_app/widgets/custom_side_menu.dart';
+import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +22,19 @@ class HomeScreen extends StatelessWidget {
             margin: const EdgeInsets.only(right: 10),
             width: 45,
             padding: const EdgeInsets.all(0),
-            child: IconButton(onPressed: () {}, icon: const Icon(Icons.person, color: Colors.black54, size: 25,)),
+            child: FittedBox(
+              child: IconButton(onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const CustomDialog(
+                    title: 'Iniciar sesión',
+                    description: 'Adelante',
+                    buttonText: 'Cerrar',
+                  ),
+                );
+              }, icon: const Icon(Icons.person, color: Colors.black54, size: 30,)),
+              fit: BoxFit.cover,
+            ),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.white,
