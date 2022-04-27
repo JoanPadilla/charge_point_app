@@ -15,7 +15,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 247, 247, 247),
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: const Text('Ajustes'),
       ),
       drawer: const CustomSideMenu(),
       body: SingleChildScrollView(

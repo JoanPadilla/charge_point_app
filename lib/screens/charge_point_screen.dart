@@ -118,7 +118,7 @@ class _ButtonSection extends StatelessWidget {
         children: [
           SizedBox(
             child: TextButton(
-              style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
+              style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
               onPressed: () {
                 //TODO: Implementar mensaje de noImplemented
               },
@@ -127,7 +127,7 @@ class _ButtonSection extends StatelessWidget {
           ),
           const VerticalDivider(color: Colors.white, indent: 8, endIndent: 8),
           TextButton(
-            style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
+            style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
             onPressed: () {
               _launchMapsUrl(39.992403, -0.069522);
             },

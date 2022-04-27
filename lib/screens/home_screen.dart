@@ -16,7 +16,23 @@ class HomeScreen extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home screen'),
+        title: const Text('Inicio'),
+        actions: [
+          Container(
+            margin: const EdgeInsets.only(right: 10),
+            width: 45,
+            padding: const EdgeInsets.all(0),
+            child: IconButton(onPressed: () {}, icon: const Icon(Icons.person, color: Colors.black54, size: 25,)),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              border: Border.all(
+                color: Colors.black54,
+                width: 2,
+              ),
+            ),
+          ),
+        ],
       ),
       drawer: const CustomSideMenu(),
       body: Column(

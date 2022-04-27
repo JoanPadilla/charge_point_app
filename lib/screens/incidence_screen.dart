@@ -10,7 +10,7 @@ class IncidenceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Incidence screen'),
+        title: const Text('Incidencia'),
       ),
       drawer: const CustomSideMenu(),
       body: SingleChildScrollView(

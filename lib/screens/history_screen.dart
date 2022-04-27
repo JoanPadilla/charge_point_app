@@ -11,7 +11,7 @@ class HistoryScreen extends StatelessWidget {
     
     return Scaffold( 
       appBar: AppBar(
-        title: const Text('History'),
+        title: const Text('Historial'),
       ),
       drawer: const CustomSideMenu(),
       body: ListView(
