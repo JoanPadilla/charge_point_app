@@ -26,11 +26,7 @@ class HomeScreen extends StatelessWidget {
               child: IconButton(onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (context) => const CustomDialog(
-                    title: 'Iniciar sesión',
-                    description: 'Adelante',
-                    buttonText: 'Cerrar',
-                  ),
+                  builder: (context) => const CustomDialog(),
                 );
               }, icon: const Icon(Icons.person, color: Colors.black54, size: 30,)),
               fit: BoxFit.cover,

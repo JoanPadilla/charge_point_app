@@ -36,7 +36,22 @@ class AppTheme {
       border: OutlineInputBorder(
         borderRadius: BorderRadius.only( bottomLeft: Radius.circular(10), topRight: Radius.circular(10), bottomRight: Radius.circular(10)),
       ),
-    )
+    ),
+    
+  );
+  
+  static const InputDecoration loginInputDecoration = InputDecoration(
+        contentPadding: EdgeInsets.all(10),
+        filled: true,
+        fillColor: Color.fromARGB(76, 183, 218, 241),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30)),
+          borderSide: BorderSide(color: Colors.white)
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30)),
+          borderSide: BorderSide(color: Colors.white)
+        ),
   );
   
 }

@@ -2,10 +2,17 @@ import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/routes/app_routes.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 
-void main() => runApp(const AppState());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+    .then((_) {
+      runApp(const AppState());
+    });
+}
 
 class AppState extends StatelessWidget {
   const AppState({ Key? key }) : super(key: key);
@@ -15,7 +22,8 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ( _ ) => MapProvider(), lazy: false),
-        ChangeNotifierProvider(create: ( _ ) => PreferenceProvider(), lazy: false,)
+        ChangeNotifierProvider(create: ( _ ) => PreferenceProvider(), lazy: false,),
+        ChangeNotifierProvider(create: ( _ ) => LoginFormProvider(), lazy: false,),
       ],
       child: const MyApp(),
     );
