@@ -1,27 +1,12 @@
-import 'package:flutter/cupertino.dart';
+import 'package:charge_point_app/providers/form_provider.dart';
 
-class RegistrationFormProvider extends ChangeNotifier{
-  
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+class RegistrationFormProvider extends FormProvider{
 
   Map<String, String> formValues = {
     'email' : '',
     'password' : '',
     'password_repeat' : '',
   };
-  
-  bool _isLoading = false;
-  
-  bool get isLoading => _isLoading;
-  set isLoading(bool value) {
-    _isLoading = value;
-    notifyListeners();
-  }
-  
-  
-  bool isValidForm() {
-    return formKey.currentState?.validate() ?? false;
-  } 
   
   bool isSamePassword() {
     return formValues['password'] == formValues['password_repeat'];

@@ -61,6 +61,7 @@ class RegistrationScreen extends StatelessWidget {
                     if (value == null || value == ''){
                       return 'Introduzca la contraseña';
                     }
+                    return null;
                   },
                 ),
                 const SizedBox(height: 40,),
@@ -74,6 +75,7 @@ class RegistrationScreen extends StatelessWidget {
                     if (!registrationForm.isSamePassword()){
                       return 'La contraseña no coincide';
                     }
+                    return null;
                   },
                 ),
                 const SizedBox(height: 40,),
@@ -92,6 +94,7 @@ class RegistrationScreen extends StatelessWidget {
                     await Future.delayed(const Duration(seconds: 2));
 
                     registrationForm.isLoading = false;
+                    //TODO: enseñar mensaje de feedback
                     Navigator.of(context).pop();
                   },
                   child: SizedBox(
@@ -101,7 +104,7 @@ class RegistrationScreen extends StatelessWidget {
                         ? 'Espere'
                         : 'Registrarse',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 20),)
+                      style: const TextStyle(color: Colors.white, fontSize: 20),)
                     ),
                   style: registrationForm.isLoading ? null : TextButton.styleFrom(
                     backgroundColor: AppTheme.secondaryColor,

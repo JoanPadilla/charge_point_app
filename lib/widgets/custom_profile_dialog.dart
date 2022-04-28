@@ -78,7 +78,9 @@ class _LogInSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    LoginFormProvider loginForm = Provider.of<LoginFormProvider>(context);
+    FormProvider loginForm = Provider.of<FormProvider>(context);
+    String email = '';
+    String password = '';
     
     return Form(
       key: loginForm.formKey,
@@ -95,7 +97,7 @@ class _LogInSection extends StatelessWidget {
               RegExp regExp  = RegExp(pattern);
               return regExp.hasMatch(value) ? null : 'El valor ingresado no parece ser un correo';
             },
-            onChanged: (value) => loginForm.email = value,
+            onChanged: (value) => email = value,
             decoration: AppTheme.loginInputDecoration.copyWith(
               hintText: 'Email',
               prefixIcon: const Icon(Icons.person_pin),
@@ -108,8 +110,9 @@ class _LogInSection extends StatelessWidget {
               if (value == null || value == ''){
                   return 'Introduzca la contraseña';
               }
+              return null;
             },
-            onChanged: (value) => loginForm.password = value,
+            onChanged: (value) => password = value,
             decoration: AppTheme.loginInputDecoration.copyWith(
               hintText: 'Contraseña',
               prefixIcon: const Icon(Icons.lock),
@@ -141,6 +144,7 @@ class _LogInSection extends StatelessWidget {
                     await Future.delayed(const Duration(seconds: 2));
 
                     loginForm.isLoading = false;
+                    //TODO: enseñar mensaje de feedback
                     Navigator.of(context).pop();
                     // if ( errorMessage == null ) {
                     //   loginForm.isLoading = false;

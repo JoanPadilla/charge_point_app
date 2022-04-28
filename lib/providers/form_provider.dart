@@ -1,11 +1,10 @@
+
+
 import 'package:flutter/cupertino.dart';
 
-class LoginFormProvider extends ChangeNotifier{
+class FormProvider extends ChangeNotifier{
   
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  String email    = '';
-  String password = '';
   
   bool _isLoading = false;
   
@@ -19,4 +18,5 @@ class LoginFormProvider extends ChangeNotifier{
   bool isValidForm() {
     return formKey.currentState?.validate() ?? false;
   } 
+  
 }
