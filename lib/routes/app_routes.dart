@@ -1,5 +1,5 @@
 import 'package:charge_point_app/models/menu_option.dart';
-import 'package:charge_point_app/screens/screends.dart';
+import 'package:charge_point_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,7 +16,7 @@ class AppRoutes {
   
   static final Map<String, Widget Function(BuildContext)> secondaryRoutes = {
     'charge_point' : ( _ ) => const ChargePointScreen(),
-    'sing_up' : ( _ ) => const SingUpScreen(),
+    'sing_up' : ( _ ) => const RegistrationScreen(),
   };
   
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {
