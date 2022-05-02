@@ -1,16 +1,18 @@
  import 'package:flutter/material.dart';
+import 'package:get/get.dart';
  
  
  class PreferenceProvider extends ChangeNotifier {
    
-   String _language = 'english';
+   Locale _language = const Locale('en', 'UK');
    
-   String get language {
+   Locale get language {
      return _language;
    }
    
-   set language(String language) {
+   set language(Locale language) {
      _language = language;
+     Get.updateLocale(language);
      notifyListeners();
    }
  }

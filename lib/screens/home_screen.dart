@@ -4,6 +4,7 @@ import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,7 @@ class HomeScreen extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Inicio'),
+        title: Text('home'.tr),
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 10),
@@ -26,7 +27,7 @@ class HomeScreen extends StatelessWidget {
               child: IconButton(onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (context) => const CustomDialog(),
+                  builder: (context) => const CustomLoginDialog(),
                 );
               }, icon: const Icon(Icons.person, color: Colors.black54, size: 30,)),
               fit: BoxFit.cover,
@@ -67,10 +68,10 @@ class HomeScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Cargadores disponibles',
+                        Text(
+                          'available_chargers'.tr,
                           textAlign: TextAlign.left,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w700
                           ),

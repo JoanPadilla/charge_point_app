@@ -2,6 +2,7 @@ import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 
@@ -15,13 +16,13 @@ class RegistrationScreen extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(55),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(55),
           child: Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 15, left: 15),
-              child: Text('Crear cuenta', style: TextStyle(color: Colors.white, fontSize: 30),),
+              padding: const EdgeInsets.only(bottom: 15, left: 15),
+              child: Text('create_account'.tr, style: const TextStyle(color: Colors.white, fontSize: 30),),
             )
           ),
         ),
@@ -39,15 +40,15 @@ class RegistrationScreen extends StatelessWidget {
                 CustomInputField(
                   formValues: registrationForm.formValues,
                   formProperty: 'email',
-                  hintText: 'Email',
+                  hintText: 'email'.tr,
                   iconData: Icons.email,
                   validator: (value) {
                     if (value == null || value == ''){
-                      return 'Introduzca un email';
+                      return 'insert_email'.tr;
                     }
                     const pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                     RegExp regExp  = RegExp(pattern);
-                    return regExp.hasMatch(value) ? null : 'El valor ingresado no parece ser un correo';
+                    return regExp.hasMatch(value) ? null : 'incorrect_email_format'.tr;
                   },
                 ),
                 const SizedBox(height: 40,),
@@ -55,11 +56,11 @@ class RegistrationScreen extends StatelessWidget {
                   obscureText: true,
                   formValues: registrationForm.formValues,
                   formProperty: 'password',
-                  hintText: 'Contraseña',
+                  hintText: 'password'.tr,
                   iconData: Icons.lock,
                   validator: (value) {
                     if (value == null || value == ''){
-                      return 'Introduzca la contraseña';
+                      return 'insert_password'.tr;
                     }
                     return null;
                   },
@@ -69,7 +70,7 @@ class RegistrationScreen extends StatelessWidget {
                   obscureText: true,
                   formValues: registrationForm.formValues,
                   formProperty: 'password_repeat',
-                  hintText: 'Repita la contraseña',
+                  hintText: 'repeat_password'.tr,
                   iconData: Icons.lock,
                   validator: (value) {
                     if (!registrationForm.isSamePassword()){
@@ -101,8 +102,8 @@ class RegistrationScreen extends StatelessWidget {
                     width: double.infinity,
                     child: Text(
                       registrationForm.isLoading
-                        ? 'Espere'
-                        : 'Registrarse',
+                        ? 'wait'.tr
+                        : 'sing_up'.tr,
                       textAlign: TextAlign.center,
                       style: const TextStyle(color: Colors.white, fontSize: 20),)
                     ),

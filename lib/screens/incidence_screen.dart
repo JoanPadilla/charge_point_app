@@ -2,6 +2,7 @@ import 'package:charge_point_app/providers/form_provider.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 
@@ -12,7 +13,7 @@ class IncidenceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Incidencia'),
+        title: Text('incidences'.tr),
       ),
       drawer: const CustomSideMenu(),
       body: const SingleChildScrollView(
@@ -34,6 +35,7 @@ class _FormSection extends StatelessWidget {
   Widget build(BuildContext context) {
     
     FormProvider incidenceForm = Provider.of<FormProvider>(context);
+    //TODO: variables así o en provider
     String subject = '';
     String chargePoint = '';
     String descripction = '';
@@ -44,7 +46,7 @@ class _FormSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           
-          const Text('Concepto', style: TextStyle(fontSize: 20),),
+          Text('subject'.tr, style: const TextStyle(fontSize: 20),),
           const SizedBox(height: 7,),
           TextFormField(
             onChanged: (value) {
@@ -52,18 +54,18 @@ class _FormSection extends StatelessWidget {
             },
             validator: (value) {
               if (value == null || value == '') {
-                return 'Introzuca el concepto de la incidencia';
+                return 'insert_incidence_subject'.tr;
               }
               return null;
             },
-            decoration: const InputDecoration(
-              hintText: 'Concepto',
+            decoration: InputDecoration(
+              hintText: 'subject'.tr,
             ),
           ),
           
           const SizedBox(height: 40,),
           
-          const Text('Punto de carga (opcional)', style: TextStyle(fontSize: 20),),
+          Text('charging_point'.tr + ' ' + 'optional'.tr, style: const TextStyle(fontSize: 20),),
           const SizedBox(height: 7,),
           DropdownButtonFormField<String>(
             isExpanded: true,
@@ -71,7 +73,7 @@ class _FormSection extends StatelessWidget {
             onSaved: (value) {
               chargePoint = value?? '';
             },
-            validator: (value) => value == null ? 'Elige una opción' : null,
+            validator: (value) => value == null ? 'choose_option'.tr : null,
             items: const [
               DropdownMenuItem(child: Text(' - - '), value: '_',),
               DropdownMenuItem(child: Text('P1'), value: 'P1',),
@@ -84,7 +86,7 @@ class _FormSection extends StatelessWidget {
           
           const SizedBox(height: 50,),
           
-          const Text('Descripcion', style: TextStyle(fontSize: 20),),
+          Text('description'.tr, style: const TextStyle(fontSize: 20),),
           const SizedBox(height: 8,),
           TextFormField(
             onChanged: (value) {
@@ -92,14 +94,14 @@ class _FormSection extends StatelessWidget {
             },
             validator: (value) {
               if (value == null || value == ''){
-                return 'Introduzca una descripción del problema';
+                return 'insert_description'.tr;
               }
               return null;
             },
             maxLines: 13,
-            decoration: const InputDecoration(
-              hintText: 'Descripcion',
-              fillColor: Color.fromARGB(255, 241, 241, 241),
+            decoration: InputDecoration(
+              hintText: 'description'.tr,
+              fillColor: const Color.fromARGB(255, 241, 241, 241),
               filled: true,
             ),
           ),
@@ -125,7 +127,7 @@ class _FormSection extends StatelessWidget {
               //TODO: sacar mensaje de feedback
               Navigator.of(context).pushNamed('home');
             },
-            child: const Text('Enviar', style: TextStyle(fontSize: 20),),
+            child: Text('send'.tr, style: TextStyle(fontSize: 20),),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               primary: AppTheme.secondaryColor

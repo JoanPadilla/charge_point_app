@@ -1,6 +1,7 @@
 import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 
@@ -11,11 +12,16 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     
     final preferenceProvider = Provider.of<PreferenceProvider>(context);
+    List<DropdownMenuItem<Locale>> dropdownItems = const [
+      DropdownMenuItem(child: Text('English'), value: Locale('en', 'UK'),),
+      DropdownMenuItem(child: Text('Español'), value: Locale('es', 'ES'),),
+      DropdownMenuItem(child: Text('Valencià'), value: Locale('ca', 'ES'),),
+    ];
     
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 247, 247, 247),
       appBar: AppBar(
-        title: const Text('Ajustes'),
+        title: Text('settings'.tr),
       ),
       drawer: const CustomSideMenu(),
       body: SingleChildScrollView(
@@ -26,7 +32,7 @@ class SettingsScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Text('Idioma', style: TextStyle(fontSize: 18),),
+                  Text('language'.tr, style: const TextStyle(fontSize: 18),),
                   const SizedBox(width: 50,),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -37,17 +43,13 @@ class SettingsScreen extends StatelessWidget {
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: DropdownButton<String>(
+                    child: DropdownButton<Locale>(
                       style: const TextStyle(fontSize: 17, color: Colors.black),
                       value: preferenceProvider.language,
                       underline: Container(),
                       borderRadius: BorderRadius.circular(10),
                       isExpanded: true,
-                      items: const [
-                        DropdownMenuItem(child: Text('English'), value: 'english',),
-                        DropdownMenuItem(child: Text('Español'), value: 'spanish',),
-                        DropdownMenuItem(child: Text('Valencià'), value: 'valencian',),
-                      ],
+                      items: dropdownItems,
                       onChanged: ( value ) {
                         preferenceProvider.language = value!;
                       },
@@ -60,7 +62,7 @@ class SettingsScreen extends StatelessWidget {
               
               const Divider(
                 height: 50,
-              )
+              ),
             ],
           ),
         ),

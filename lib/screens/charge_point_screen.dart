@@ -1,5 +1,6 @@
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
@@ -28,10 +29,10 @@ class ChargePointScreen extends StatelessWidget {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('Cargador:  P1', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),),
-                      SizedBox(height: 8),
-                      Text('Cord.: (10.234, -0.42)', style: TextStyle(fontSize: 20, color: Colors.black54),),
+                    children: [
+                      Text('charger'.tr + ' P1' , style: const TextStyle(fontSize: 35, fontWeight: FontWeight.bold),),
+                      const SizedBox(height: 8),
+                      Text('cord.'.tr + ': (10.234, -0.42)', style: const TextStyle(fontSize: 20, color: Colors.black54),),
                     ],
                   ),
                 ],
@@ -50,10 +51,10 @@ class ChargePointScreen extends StatelessWidget {
                   //   BoxShadow(blurRadius: 4, offset: Offset(2, 2))
                   // ]
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    'Disponible',
-                    style: TextStyle(
+                    'available'.tr,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
@@ -122,7 +123,7 @@ class _ButtonSection extends StatelessWidget {
               onPressed: () {
                 //TODO: Implementar mensaje de noImplemented
               },
-              child: const _CustomButton(text: 'BOOK', icon: Icons.book_outlined,),
+              child: _CustomButton(text: 'book'.tr, icon: Icons.book_outlined,),
             ),
           ),
           const VerticalDivider(color: Colors.white, indent: 8, endIndent: 8),
@@ -131,7 +132,7 @@ class _ButtonSection extends StatelessWidget {
             onPressed: () {
               _launchMapsUrl(39.992403, -0.069522);
             },
-            child: const _CustomButton(text: 'ROUTE', icon: Icons.map_outlined,),
+            child: _CustomButton(text: 'route'.tr, icon: Icons.map_outlined,),
           ),
         ],
       ),

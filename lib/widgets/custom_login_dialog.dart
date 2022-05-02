@@ -1,11 +1,12 @@
 import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:provider/provider.dart';
 
-class CustomDialog extends StatelessWidget {
+class CustomLoginDialog extends StatelessWidget {
 
-  const CustomDialog({ Key? key, }) : super(key: key);
+  const CustomLoginDialog({ Key? key, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +41,10 @@ class CustomDialog extends StatelessWidget {
             child: SingleChildScrollView(
               physics:const BouncingScrollPhysics(),
               child: Column(
-                children: const [
-                  Text('Iniciar sesion', style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500, color: Colors.black,),),
-                  SizedBox(height: 40),
-                  _LogInSection(),
+                children: [
+                  Text('log_in'.tr, style: const TextStyle(fontSize: 27, fontWeight: FontWeight.w500, color: Colors.black,),),
+                  const SizedBox(height: 40),
+                  const _LogInSection(),
                 ],
               ),
             ),
@@ -90,16 +91,16 @@ class _LogInSection extends StatelessWidget {
           TextFormField(
             validator: (value) {
               if (value == null || value == ''){
-                return 'Inserte un email';
+                return 'insert_email'.tr;
               }
               // Regular expression for email validation
               String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
               RegExp regExp  = RegExp(pattern);
-              return regExp.hasMatch(value) ? null : 'El valor ingresado no parece ser un correo';
+              return regExp.hasMatch(value) ? null : 'incorrect_email_format'.tr;
             },
             onChanged: (value) => email = value,
             decoration: AppTheme.loginInputDecoration.copyWith(
-              hintText: 'Email',
+              hintText: 'email'.tr,
               prefixIcon: const Icon(Icons.person_pin),
             ),
           ),
@@ -108,13 +109,13 @@ class _LogInSection extends StatelessWidget {
             obscureText: true,
             validator: (value) {
               if (value == null || value == ''){
-                  return 'Introduzca la contraseña';
+                  return 'insert_password'.tr;
               }
               return null;
             },
             onChanged: (value) => password = value,
             decoration: AppTheme.loginInputDecoration.copyWith(
-              hintText: 'Contraseña',
+              hintText: 'password'.tr,
               prefixIcon: const Icon(Icons.lock),
             ),
           ),
@@ -162,8 +163,8 @@ class _LogInSection extends StatelessWidget {
                   },
                   child: Text(
                      loginForm.isLoading
-                      ? 'Espere'
-                      : 'Iniciar sesión',
+                      ? 'wait'.tr
+                      : 'log_in'.tr,
                     style: const TextStyle(
                       color: Colors.white,
                     ),
@@ -180,9 +181,9 @@ class _LogInSection extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).popAndPushNamed('sing_up'); // To close the dialog
                   },
-                  child: const Text(
-                    'Registrarse',
-                    style: TextStyle(
+                  child: Text(
+                    'sing_up'.tr,
+                    style: const TextStyle(
                       color: AppTheme.primaryColor,
                     ),
                   ),
