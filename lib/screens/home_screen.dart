@@ -19,6 +19,8 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('home'.tr),
         actions: [
+          _NotificationsButton(),
+          const SizedBox(width:20),
           Container(
             margin: const EdgeInsets.only(right: 10),
             width: 45,
@@ -49,10 +51,11 @@ class HomeScreen extends StatelessWidget {
         children: [
           
           const _CustomMap(),
-          const Divider(
+          Divider(
           thickness: 1,
           height: 1,
-          color: Color.fromARGB(255, 198, 163, 221),
+          color: AppTheme.primaryColor.withOpacity(0.2)
+          // color: Color.fromARGB(255, 198, 163, 221),
         ),
           
           Expanded(
@@ -90,6 +93,32 @@ class HomeScreen extends StatelessWidget {
           ),
           
           
+        ],
+      ),
+    );
+  }
+}
+
+class _NotificationsButton extends StatelessWidget {
+  const _NotificationsButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<PreferenceProvider>(context, listen: true);
+    return IconButton(
+      onPressed: () {
+        provider.notificaciones = !provider.notificaciones;
+      },
+      icon: Stack(
+        children: <Widget> [
+          const Center(child: Icon(Icons.notifications, color: Colors.white)),
+          if (provider.notificaciones) const Positioned(
+            child: Icon(Icons.brightness_1, color: Colors.red, size: 12),
+            left: 17,
+            top: 9,
+          ),
         ],
       ),
     );
@@ -215,7 +244,7 @@ class _ChargePointButton extends StatelessWidget {
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.centerRight,
-                stops: [0.05,0.45],
+                stops: [0.05,0.35],
               ) : null,
             borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
