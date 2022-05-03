@@ -1,5 +1,6 @@
 import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/routes/app_routes.dart';
+import 'package:charge_point_app/share_preference/preference.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/themes/local_string.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +9,15 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Preference.init();
+  
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
     .then((_) {
       runApp(const AppState());
-    });
+    }
+  );
 }
 
 class AppState extends StatelessWidget {
@@ -24,7 +28,7 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ( _ ) => MapProvider(), lazy: false),
-        ChangeNotifierProvider(create: ( _ ) => PreferenceProvider(), lazy: false,),
+        ChangeNotifierProvider(create: ( _ ) => PreferenceProvider(language: Preference.language), lazy: false,),
         ChangeNotifierProvider(create: ( _ ) => FormProvider(), lazy: false,),
         ChangeNotifierProvider(create: ( _ ) => RegistrationFormProvider(), lazy: false,),
       ],
@@ -39,9 +43,10 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    PreferenceProvider preference = Provider.of<PreferenceProvider>(context);
     return GetMaterialApp(
       translations: LocalString(),
-      locale: const Locale('ca', 'ES'),
+      locale: preference.language,
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       routes: AppRoutes.getAppRoutes(),

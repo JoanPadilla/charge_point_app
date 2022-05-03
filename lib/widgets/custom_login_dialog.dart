@@ -98,6 +98,7 @@ class _LogInSection extends StatelessWidget {
               RegExp regExp  = RegExp(pattern);
               return regExp.hasMatch(value) ? null : 'incorrect_email_format'.tr;
             },
+            keyboardType: TextInputType.emailAddress,
             onChanged: (value) => email = value,
             decoration: AppTheme.loginInputDecoration.copyWith(
               hintText: 'email'.tr,
@@ -145,7 +146,20 @@ class _LogInSection extends StatelessWidget {
                     await Future.delayed(const Duration(seconds: 2));
 
                     loginForm.isLoading = false;
-                    //TODO: enseñar mensaje de feedback
+                    ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+                      duration: const Duration(seconds: 2),
+                      backgroundColor: Colors.transparent,
+                      elevation: 20,
+                      content: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 33, 117, 243),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: const Color.fromARGB(255, 68, 102, 255), width: 3),
+                        ),
+                        child: Text('logged_in'.tr, style: const TextStyle(fontSize: 15),)
+                      ),
+                    ));
                     Navigator.of(context).pop();
                     // if ( errorMessage == null ) {
                     //   loginForm.isLoading = false;
@@ -179,10 +193,10 @@ class _LogInSection extends StatelessWidget {
                     )
                   ),
                   onPressed: () {
-                    Navigator.of(context).popAndPushNamed('sing_up'); // To close the dialog
+                    Navigator.of(context).popAndPushNamed('sign_up'); // To close the dialog
                   },
                   child: Text(
-                    'sing_up'.tr,
+                    'sign_up'.tr,
                     style: const TextStyle(
                       color: AppTheme.primaryColor,
                     ),

@@ -51,6 +51,7 @@ class SettingsScreen extends StatelessWidget {
                       isExpanded: true,
                       items: dropdownItems,
                       onChanged: ( value ) {
+                        preferenceProvider.setLanguage(value);
                         preferenceProvider.language = value!;
                       },
                     ),

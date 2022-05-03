@@ -16,7 +16,7 @@ class AppRoutes {
   
   static final Map<String, Widget Function(BuildContext)> secondaryRoutes = {
     'charge_point' : ( _ ) => const ChargePointScreen(),
-    'sing_up' : ( _ ) => const RegistrationScreen(),
+    'sign_up' : ( _ ) => const RegistrationScreen(),
   };
   
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {

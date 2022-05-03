@@ -1,20 +1,25 @@
- import 'package:flutter/material.dart';
+ import 'package:charge_point_app/share_preference/preference.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
  
  
  class PreferenceProvider extends ChangeNotifier {
    
-   Locale _language = const Locale('en', 'UK');
+   Locale language;
    
-   Locale get language {
-     return _language;
-   }
+   PreferenceProvider ({
+     required this.language,
+   });
    
-   set language(Locale language) {
-     _language = language;
+   setLanguage(Locale? newLanguage) {
+     if (newLanguage == null) return;
+     language = newLanguage;
+     Preference.language = language;
      Get.updateLocale(language);
      notifyListeners();
    }
+   
    
    //TODO: improvisacion para probar el boton de las notificaciones
    bool _notificaciones = true;

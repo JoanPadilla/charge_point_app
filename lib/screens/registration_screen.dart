@@ -42,6 +42,7 @@ class RegistrationScreen extends StatelessWidget {
                   formProperty: 'email',
                   hintText: 'email'.tr,
                   iconData: Icons.email,
+                  inputType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || value == ''){
                       return 'insert_email'.tr;
@@ -95,7 +96,20 @@ class RegistrationScreen extends StatelessWidget {
                     await Future.delayed(const Duration(seconds: 2));
 
                     registrationForm.isLoading = false;
-                    //TODO: enseñar mensaje de feedback
+                    ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+                      duration: const Duration(seconds: 2),
+                      backgroundColor: Colors.transparent,
+                      elevation: 20,
+                      content: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 33, 117, 243),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: const Color.fromARGB(255, 68, 102, 255), width: 3),
+                        ),
+                        child: Text('signed_up'.tr, style: const TextStyle(fontSize: 15),)
+                      ),
+                    ));
                     Navigator.of(context).pop();
                   },
                   child: SizedBox(
@@ -103,7 +117,7 @@ class RegistrationScreen extends StatelessWidget {
                     child: Text(
                       registrationForm.isLoading
                         ? 'wait'.tr
-                        : 'sing_up'.tr,
+                        : 'sign_up'.tr,
                       textAlign: TextAlign.center,
                       style: const TextStyle(color: Colors.white, fontSize: 20),)
                     ),

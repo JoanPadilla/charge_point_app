@@ -9,11 +9,13 @@ class CustomInputField extends StatelessWidget {
   final String formProperty;
   final String hintText;
   final IconData iconData;
+  final TextInputType? inputType;
   
   const CustomInputField({
     Key? key,
     this.obscureText = false,
     this.validator,
+    this.inputType,
     required this.formValues,
     required this.formProperty,
     required this.hintText,
@@ -23,6 +25,7 @@ class CustomInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: inputType,
       obscureText: obscureText,
       validator: validator,
       onChanged: (value) => formValues[formProperty] = value,
