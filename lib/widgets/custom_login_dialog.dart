@@ -1,5 +1,6 @@
 import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
+import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:provider/provider.dart';
@@ -146,19 +147,10 @@ class _LogInSection extends StatelessWidget {
                     await Future.delayed(const Duration(seconds: 2));
 
                     loginForm.isLoading = false;
-                    ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-                      duration: const Duration(seconds: 2),
-                      backgroundColor: Colors.transparent,
-                      elevation: 20,
-                      content: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 33, 117, 243),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: const Color.fromARGB(255, 68, 102, 255), width: 3),
-                        ),
-                        child: Text('logged_in'.tr, style: const TextStyle(fontSize: 15),)
-                      ),
+                    ScaffoldMessenger.of(context).showSnackBar( CustomSnackBar(
+                      color: const Color.fromARGB(255, 33, 117, 243),
+                      borderColor: const Color.fromARGB(255, 68, 102, 255),
+                      text: 'logged_in'.tr,
                     ));
                     Navigator.of(context).pop();
                     // if ( errorMessage == null ) {

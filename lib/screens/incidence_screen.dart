@@ -124,10 +124,21 @@ class _FormSection extends StatelessWidget {
               
               incidenceForm.isLoading = false;
               //TODO: enviar a la misma pantalla pero antes de empezar el formulario
-              //TODO: sacar mensaje de feedback
+              //TODO
+              ScaffoldMessenger.of(context).showSnackBar( CustomSnackBar(
+                color: const Color.fromARGB(255, 33, 117, 243),
+                borderColor: const Color.fromARGB(255, 68, 102, 255),
+                text: 'incidence_sent'.tr,
+              ));
+              incidenceForm.resetFormKey();
               Navigator.of(context).pushNamed('home');
             },
-            child: Text('send'.tr, style: TextStyle(fontSize: 20),),
+            child: Text(
+              incidenceForm.isLoading
+              ? 'wait'.tr
+              : 'send'.tr,
+              style: const TextStyle(fontSize: 20),
+            ),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               primary: AppTheme.secondaryColor

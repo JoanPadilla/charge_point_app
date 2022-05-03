@@ -19,4 +19,8 @@ class FormProvider extends ChangeNotifier{
     return formKey.currentState?.validate() ?? false;
   } 
   
+  void resetFormKey() {
+    formKey = GlobalKey<FormState>();
+  }
+  
 }

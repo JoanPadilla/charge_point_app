@@ -2,7 +2,7 @@ import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/routes/app_routes.dart';
 import 'package:charge_point_app/share_preference/preference.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
-import 'package:charge_point_app/themes/local_string.dart';
+import 'package:charge_point_app/share_preference/local_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

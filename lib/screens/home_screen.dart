@@ -171,7 +171,6 @@ class _CustomTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Table(
-      //TODO: Els tamanys y les distancies s'han de fer dinamics, amb l'amplaria de la pantalla
       defaultColumnWidth: const FixedColumnWidth(120),
       children: const [
         TableRow(

@@ -96,19 +96,10 @@ class RegistrationScreen extends StatelessWidget {
                     await Future.delayed(const Duration(seconds: 2));
 
                     registrationForm.isLoading = false;
-                    ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-                      duration: const Duration(seconds: 2),
-                      backgroundColor: Colors.transparent,
-                      elevation: 20,
-                      content: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 33, 117, 243),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: const Color.fromARGB(255, 68, 102, 255), width: 3),
-                        ),
-                        child: Text('signed_up'.tr, style: const TextStyle(fontSize: 15),)
-                      ),
+                    ScaffoldMessenger.of(context).showSnackBar( CustomSnackBar(
+                      color: const Color.fromARGB(255, 33, 117, 243),
+                      borderColor: const Color.fromARGB(255, 68, 102, 255),
+                      text: 'signed_up'.tr,
                     ));
                     Navigator.of(context).pop();
                   },

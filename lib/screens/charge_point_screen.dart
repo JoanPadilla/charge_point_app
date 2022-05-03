@@ -1,4 +1,6 @@
+import 'package:charge_point_app/services/services.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
+import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -121,7 +123,11 @@ class _ButtonSection extends StatelessWidget {
             child: TextButton(
               style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
               onPressed: () {
-                //TODO: Implementar mensaje de noImplemented
+                ScaffoldMessenger.of(context).showSnackBar( CustomSnackBar(
+                      color: const Color.fromARGB(255, 122, 122, 120),
+                      borderColor: const Color.fromARGB(255, 175, 175, 175),
+                      text: 'not_implemented'.tr,
+                    )); 
               },
               child: _CustomButton(text: 'book'.tr, icon: Icons.book_outlined,),
             ),
@@ -130,7 +136,7 @@ class _ButtonSection extends StatelessWidget {
           TextButton(
             style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
             onPressed: () {
-              _launchMapsUrl(39.992403, -0.069522);
+              MapService.launchMapsUrl(39.992403, -0.069522);
             },
             child: _CustomButton(text: 'route'.tr, icon: Icons.map_outlined,),
           ),
@@ -140,14 +146,14 @@ class _ButtonSection extends StatelessWidget {
   }
   
   //TODO: transportar a service
-  void _launchMapsUrl(double lat, double lon) async {
-    final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lon'; 
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+  // void _launchMapsUrl(double lat, double lon) async {
+  //   final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lon'; 
+  //   if (await canLaunchUrl(Uri.parse(url))) {
+  //     await launchUrl(Uri.parse(url));
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 }
 
 class _CustomButton extends StatelessWidget {
