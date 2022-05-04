@@ -4,12 +4,14 @@ import 'package:charge_point_app/share_preference/preference.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/share_preference/local_string.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 
 void main() async {
+  debugPaintSizeEnabled = false;
   WidgetsFlutterBinding.ensureInitialized();
   await Preference.init();
   
