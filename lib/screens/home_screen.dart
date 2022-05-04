@@ -1,14 +1,11 @@
-import 'dart:async';
-
 import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-//TODO: separar clase
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   
@@ -19,7 +16,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('home'.tr),
         actions: [
-          NotificationsButton(),
+          const _NotificationsButton(),
           const SizedBox(width:20),
           Container(
             margin: const EdgeInsets.only(right: 10),
@@ -50,24 +47,19 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //TODO: custom_info_window per al mapa
-          const _CustomMap(),
+          const ChargePointsMap(),
           Divider(
           thickness: 1,
           height: 1,
           color: AppTheme.primaryColor.withOpacity(0.2)
-          // color: Color.fromARGB(255, 198, 163, 221),
         ),
-          
           Expanded(
             child: ListView(
-
               children: [
                 const SizedBox(height: 25,),
-            
                 Row(
                   children: [
                     const SizedBox(width: 30,),
-                    
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -79,59 +71,45 @@ class HomeScreen extends StatelessWidget {
                             fontWeight: FontWeight.w700
                           ),
                         ),
-                        
                         Container(height: 4, width: 170, color: AppTheme.primaryColor,),
                       ],
                     ),
                   ],
                 ),
-                
                 const SizedBox(height: 10,),
                 const _CustomTable(),
               ],
             ),
           ),
-          
-          
         ],
       ),
     );
   }
 }
 
-class _CustomMap extends StatefulWidget {
-  const _CustomMap({ Key? key }) : super(key: key);
+class _NotificationsButton extends StatelessWidget {
+  const _NotificationsButton({
+    Key? key,
+  }) : super(key: key);
 
-  @override
-  State<_CustomMap> createState() => _CustomMapState();
-}
-
-class _CustomMapState extends State<_CustomMap> {
-
-  final Completer<GoogleMapController> _mapController = Completer();
-  
   @override
   Widget build(BuildContext context) {
-    
-    final mapProvider = Provider.of<MapProvider>(context);
-    
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 7 * 3,
-      width: double.infinity,
-      child: mapProvider.loading
-      ? const Padding(
-        padding:  EdgeInsets.all(50.0),
-        child:  CircularProgressIndicator.adaptive(),
-      ) 
-      : GoogleMap(
-        zoomControlsEnabled: false,
-        mapType: MapType.normal,
-        markers: mapProvider.markers,
-        initialCameraPosition: mapProvider.initialPosition,
-        onMapCreated: (GoogleMapController controller) {
-          controller.setMapStyle(mapProvider.mapStyle);
-          _mapController.complete(controller);
-        } ,
+    final provider = Provider.of<NotificationsProvider>(context, listen: true);
+    return IconButton(
+      key: provider.key,
+      onPressed: () {
+        provider.notificaciones = !provider.notificaciones;
+        provider.isMenuOpen ? provider.closeNotifications() : provider.openNotifications(context);
+      },
+      icon: Stack(
+        children: <Widget> [
+          const Center(child: Icon(Icons.notifications, color: Colors.white, size: 25,),),
+          if (provider.notificaciones) const Positioned(
+            child: Icon(Icons.brightness_1, color: Colors.red, size: 12),
+            left: 17,
+            top: 9,
+          ),
+        ],
       ),
     );
   }

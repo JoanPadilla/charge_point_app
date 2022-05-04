@@ -1,3 +1,4 @@
+import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class NotificationsProvider extends ChangeNotifier {
@@ -13,29 +14,10 @@ class NotificationsProvider extends ChangeNotifier {
     buttonSize = renderBox!.size;
     buttonPosition = renderBox.localToGlobal(Offset.zero);
   }
-  
-  OverlayEntry _overlayEntryBuilder () {
-    return OverlayEntry(builder: (context) {
-      return Positioned(
-        top: buttonPosition!.dy + buttonSize!.height + 10,
-        left: buttonPosition!.dx + (buttonSize!.width / 2) - 70,
-        child: Container(
-          height: 100,
-          width: 140,
-          decoration: ShapeDecoration(
-            color: Colors.red,
-            shape: _NotificationsWindowBorder()
-          ),
-          alignment: Alignment.center,
-          
-        ),
-      );
-    });
-  }
 
   void openNotifications(BuildContext context) {
     _findButton();
-    _overlayEntry = _overlayEntryBuilder();
+    _overlayEntry = OverlayEntry(builder: (context) => NotificationsDropdown(buttonPosition: buttonPosition, buttonSize: buttonSize));
     Overlay.of(context)!.insert(_overlayEntry!);
     isMenuOpen = !isMenuOpen;
   }
@@ -51,7 +33,6 @@ class NotificationsProvider extends ChangeNotifier {
     }
   }
   
-  
   bool _notificaciones = true;
    
   bool get notificaciones => _notificaciones;
@@ -61,30 +42,59 @@ class NotificationsProvider extends ChangeNotifier {
   }
 }
 
-class _NotificationsWindowBorder extends ShapeBorder {
-  @override
-  EdgeInsetsGeometry get dimensions => const EdgeInsets.all(5);
+// class _NotificationsDropdown extends StatelessWidget {
+//   const _NotificationsDropdown({
+//     Key? key,
+//     required this.buttonPosition,
+//     required this.buttonSize,
+//   }) : super(key: key);
 
-  @override
-  Path getInnerPath(Rect rect, {TextDirection? textDirection}) => Path();
+//   final Offset? buttonPosition;
+//   final Size? buttonSize;
 
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    rect = Rect.fromPoints(rect.topLeft, rect.bottomRight - const Offset(0, 20));
-    return Path()
-      ..addRRect(RRect.fromRectAndRadius(rect, const Radius.circular(10)))
-      ..moveTo(rect.topCenter.dx - 10, rect.topCenter.dy)
-      ..relativeLineTo(10, -10)
-      ..relativeLineTo(10, 10)
-      ..close();
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Positioned(
+//       top: buttonPosition!.dy + buttonSize!.height + 10,
+//       left: buttonPosition!.dx + (buttonSize!.width / 2) - 70,
+//       child: Container(
+//         height: 100,
+//         width: 140,
+//         decoration: ShapeDecoration(
+//           color: Colors.red,
+//           shape: _NotificationsWindowBorder()
+//         ),
+//         alignment: Alignment.center,
+        
+//       ),
+//     );
+//   }
+// }
 
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
+// class _NotificationsWindowBorder extends ShapeBorder {
+//   @override
+//   EdgeInsetsGeometry get dimensions => const EdgeInsets.all(5);
 
-  @override
-  ShapeBorder scale(double t) {
-    return this;
-  }
+//   @override
+//   Path getInnerPath(Rect rect, {TextDirection? textDirection}) => Path();
+
+//   @override
+//   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
+//     rect = Rect.fromPoints(rect.topLeft, rect.bottomRight - const Offset(0, 20));
+//     return Path()
+//       ..addRRect(RRect.fromRectAndRadius(rect, const Radius.circular(10)))
+//       ..moveTo(rect.topCenter.dx - 10, rect.topCenter.dy)
+//       ..relativeLineTo(10, -10)
+//       ..relativeLineTo(10, 10)
+//       ..close();
+//   }
+
+//   @override
+//   void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
+
+//   @override
+//   ShapeBorder scale(double t) {
+//     return this;
+//   }
   
-}
+// }
