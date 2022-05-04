@@ -12,7 +12,7 @@ class CustomSideMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NotificationsProvider notificationsProvider = Provider.of<NotificationsProvider>(context);
+    NotificationsProvider notificationsProvider = Provider.of<NotificationsProvider>(context, listen: false);
     notificationsProvider.closeNotifications();
     return SafeArea(
       child: Drawer(

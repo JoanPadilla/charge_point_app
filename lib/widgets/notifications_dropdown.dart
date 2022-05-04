@@ -15,12 +15,12 @@ class NotificationsDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       top: buttonPosition!.dy + buttonSize!.height + 10,
-      left: buttonPosition!.dx + (buttonSize!.width / 2) - 70,
+      left: buttonPosition!.dx + (buttonSize!.width / 2) - 110,
       child: Container(
-        height: 100,
-        width: 140,
+        height: 250,
+        width: 180,
         decoration: ShapeDecoration(
-          color: Colors.red,
+          color: Color.fromARGB(255, 145, 182, 224),
           shape: _NotificationsWindowBorder()
         ),
         alignment: Alignment.center,
@@ -42,7 +42,7 @@ class _NotificationsWindowBorder extends ShapeBorder {
     rect = Rect.fromPoints(rect.topLeft, rect.bottomRight - const Offset(0, 20));
     return Path()
       ..addRRect(RRect.fromRectAndRadius(rect, const Radius.circular(10)))
-      ..moveTo(rect.topCenter.dx - 10, rect.topCenter.dy)
+      ..moveTo(rect.topCenter.dx + 10, rect.topCenter.dy)
       ..relativeLineTo(10, -10)
       ..relativeLineTo(10, 10)
       ..close();
