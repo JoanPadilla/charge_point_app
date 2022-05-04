@@ -43,8 +43,10 @@ class NotificationsProvider extends ChangeNotifier {
   void closeNotifications() {
     if (_overlayEntry == null) {
       return;
-    } else {
+    }
+    if (_overlayEntry != null) {
       _overlayEntry!.remove();
+      _overlayEntry = null;
       isMenuOpen = !isMenuOpen;
     }
   }

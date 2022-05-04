@@ -7,49 +7,6 @@ class NotificationsButton extends StatelessWidget {
   const NotificationsButton({
     Key? key,
   }) : super(key: key);
-  
-  // final GlobalKey _key = LabeledGlobalKey("icon_button");
-  // OverlayEntry? _overlayEntry;
-  // Offset? buttonPosition;
-  // Size? buttonSize;
-  // bool isMenuOpen = false;
-  
-  // _findButton() {
-  //   RenderBox? renderBox = _key.currentContext!.findRenderObject() as RenderBox?;
-  //   buttonSize = renderBox!.size;
-  //   buttonPosition = renderBox.localToGlobal(Offset.zero);
-  // }
-  
-  // OverlayEntry _overlayEntryBuilder () {
-  //   return OverlayEntry(builder: (context) {
-  //     return Positioned(
-  //       top: buttonPosition!.dy + buttonSize!.height + 10,
-  //       left: buttonPosition!.dx + (buttonSize!.width / 2) - 70,
-  //       child: Container(
-  //         height: 100,
-  //         width: 140,
-  //         decoration: ShapeDecoration(
-  //           color: Colors.red,
-  //           shape: _NotificationsWindowBorder()
-  //         ),
-  //         alignment: Alignment.center,
-          
-  //       ),
-  //     );
-  //   });
-  // }
-
-  // void openNotifications(BuildContext context) {
-  //   _findButton();
-  //   _overlayEntry = _overlayEntryBuilder();
-  //   Overlay.of(context)!.insert(_overlayEntry!);
-  //   isMenuOpen = !isMenuOpen;
-  // }
-  
-  // void closeNotifications() {
-  //   _overlayEntry!.remove();
-  //   isMenuOpen = !isMenuOpen;
-  // }
 
   @override
   Widget build(BuildContext context) {
