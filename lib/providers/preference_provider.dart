@@ -20,13 +20,5 @@ import 'package:get/get.dart';
      notifyListeners();
    }
    
-   
-   //TODO: improvisacion para probar el boton de las notificaciones
-   bool _notificaciones = true;
-   
-   bool get notificaciones => _notificaciones;
-   set notificaciones(bool value) {
-     _notificaciones = value;
-     notifyListeners();
-   }
+
  }

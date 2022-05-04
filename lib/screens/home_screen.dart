@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('home'.tr),
         actions: [
-          _NotificationsButton(),
+          NotificationsButton(),
           const SizedBox(width:20),
           Container(
             margin: const EdgeInsets.only(right: 10),
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          
+          //TODO: custom_info_window per al mapa
           const _CustomMap(),
           Divider(
           thickness: 1,
@@ -93,32 +93,6 @@ class HomeScreen extends StatelessWidget {
           ),
           
           
-        ],
-      ),
-    );
-  }
-}
-
-class _NotificationsButton extends StatelessWidget {
-  const _NotificationsButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final provider = Provider.of<PreferenceProvider>(context, listen: true);
-    return IconButton(
-      onPressed: () {
-        provider.notificaciones = !provider.notificaciones;
-      },
-      icon: Stack(
-        children: <Widget> [
-          const Center(child: Icon(Icons.notifications, color: Colors.white)),
-          if (provider.notificaciones) const Positioned(
-            child: Icon(Icons.brightness_1, color: Colors.red, size: 12),
-            left: 17,
-            top: 9,
-          ),
         ],
       ),
     );

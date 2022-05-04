@@ -31,6 +31,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: ( _ ) => PreferenceProvider(language: Preference.language), lazy: false,),
         ChangeNotifierProvider(create: ( _ ) => FormProvider(), lazy: false,),
         ChangeNotifierProvider(create: ( _ ) => RegistrationFormProvider(), lazy: false,),
+        ChangeNotifierProvider(create: ( _ ) => NotificationsProvider(), lazy: false,),
       ],
       child: const MyApp(),
     );

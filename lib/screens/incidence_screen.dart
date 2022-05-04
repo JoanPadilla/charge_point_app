@@ -124,14 +124,13 @@ class _FormSection extends StatelessWidget {
               
               incidenceForm.isLoading = false;
               //TODO: enviar a la misma pantalla pero antes de empezar el formulario
-              //TODO
               ScaffoldMessenger.of(context).showSnackBar( CustomSnackBar(
                 color: const Color.fromARGB(255, 33, 117, 243),
                 borderColor: const Color.fromARGB(255, 68, 102, 255),
                 text: 'incidence_sent'.tr,
               ));
               incidenceForm.resetFormKey();
-              Navigator.of(context).pushNamed('home');
+              Navigator.of(context).pushReplacementNamed('home');
             },
             child: Text(
               incidenceForm.isLoading
