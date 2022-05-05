@@ -3,7 +3,6 @@ import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:provider/provider.dart';
 
 
@@ -12,21 +11,14 @@ class IncidenceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    IncidenceFormProvider formProvider = Provider.of<IncidenceFormProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('incidences'.tr),
       ),
       drawer: const CustomSideMenu(),
-      body: Center(
+      body: const Center(
         child: SingleChildScrollView(
-          child: !formProvider.startedForm 
-            ? TextButton(
-              child: const Text('data'),
-              onPressed: () {
-                formProvider.startedForm = !formProvider.startedForm;
-              },) 
-            : const _FormSection(),
+          child: _FormSection(),
         ),
       )
     );
@@ -44,14 +36,15 @@ class _FormSection extends StatelessWidget {
     IncidenceFormProvider formProvider = Provider.of<IncidenceFormProvider>(context);
     
     return Padding(
-      padding: const EdgeInsets.all(30.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Form(
         key: formProvider.formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            
-            Text('subject'.tr, style: const TextStyle(fontSize: 20),),
+            Text('fill_incidence_form'.tr, textAlign: TextAlign.start, style: const TextStyle(fontSize: 18),),
+            const SizedBox(height:23),
+            Text('subject'.tr, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
             const SizedBox(height: 7,),
             TextFormField(
               onChanged: (value) {
@@ -63,14 +56,15 @@ class _FormSection extends StatelessWidget {
                 }
                 return null;
               },
+              maxLength: 40,
               decoration: InputDecoration(
                 hintText: 'subject'.tr,
               ),
             ),
             
-            const SizedBox(height: 35,),
+            const SizedBox(height: 20,),
             
-            Text('charging_point'.tr + ' ' + 'optional'.tr, style: const TextStyle(fontSize: 20),),
+            Text('charging_point'.tr + ' ' + 'optional'.tr, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
             const SizedBox(height: 7,),
             DropdownButtonFormField<String>(
               isExpanded: true,
@@ -89,9 +83,9 @@ class _FormSection extends StatelessWidget {
               onChanged: ( _ ) {},
             ),
             
-            const SizedBox(height: 45,),
+            const SizedBox(height: 35,),
             
-            Text('description'.tr, style: const TextStyle(fontSize: 20),),
+            Text('description'.tr, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
             const SizedBox(height: 8,),
             TextFormField(
               onChanged: (value) {
@@ -103,7 +97,7 @@ class _FormSection extends StatelessWidget {
                 }
                 return null;
               },
-              maxLines: 11,
+              maxLines: 9,
               decoration: InputDecoration(
                 hintText: 'description'.tr,
                 fillColor: const Color.fromARGB(255, 241, 241, 241),
@@ -111,7 +105,7 @@ class _FormSection extends StatelessWidget {
               ),
             ),
             
-            const SizedBox(height: 40,),
+            const SizedBox(height: 30,),
             
             ElevatedButton(
               onPressed: formProvider.isLoading ? null : () async {
@@ -128,7 +122,6 @@ class _FormSection extends StatelessWidget {
                 await Future.delayed(const Duration(seconds: 2));
                 
                 formProvider.isLoading = false;
-                formProvider.startedForm = !formProvider.startedForm;
                 ScaffoldMessenger.of(context).showSnackBar( CustomSnackBar(
                   color: const Color.fromARGB(255, 33, 117, 243),
                   borderColor: const Color.fromARGB(255, 68, 102, 255),

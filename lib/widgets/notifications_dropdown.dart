@@ -1,5 +1,4 @@
 import 'package:charge_point_app/providers/notifications_provider.dart';
-import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

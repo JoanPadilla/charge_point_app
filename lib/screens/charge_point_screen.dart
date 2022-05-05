@@ -143,16 +143,6 @@ class _ButtonSection extends StatelessWidget {
       ),
     );
   }
-  
-  //TODO: transportar a service
-  // void _launchMapsUrl(double lat, double lon) async {
-  //   final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lon'; 
-  //   if (await canLaunchUrl(Uri.parse(url))) {
-  //     await launchUrl(Uri.parse(url));
-  //   } else {
-  //     throw 'Could not launch $url';
-  //   }
-  // }
 }
 
 class _CustomButton extends StatelessWidget {
