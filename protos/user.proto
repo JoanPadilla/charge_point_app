@@ -1,11 +1,10 @@
 syntax = "proto3";
 
-//option java_package = "";
-//option dart_package = "lib.service.proto";
+package grpc;
 
 service user{
     rpc login(LoginRequest) returns (APIResponse);
-    rpc logout(Empty) return(APIResponse);
+    rpc logout(Empty) returns (APIResponse);
 }
 
 message LoginRequest{

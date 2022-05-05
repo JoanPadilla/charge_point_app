@@ -80,12 +80,10 @@ class _LogInSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    FormProvider loginForm = Provider.of<FormProvider>(context);
-    String email = '';
-    String password = '';
+    LoginFormProvider formProvider = Provider.of<LoginFormProvider>(context);
     
     return Form(
-      key: loginForm.formKey,
+      key: formProvider.formKey,
       child: Column( 
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -100,7 +98,7 @@ class _LogInSection extends StatelessWidget {
               return regExp.hasMatch(value) ? null : 'incorrect_email_format'.tr;
             },
             keyboardType: TextInputType.emailAddress,
-            onChanged: (value) => email = value,
+            onChanged: (value) => formProvider.email = value,
             decoration: AppTheme.loginInputDecoration.copyWith(
               hintText: 'email'.tr,
               prefixIcon: const Icon(Icons.person_pin),
@@ -115,7 +113,7 @@ class _LogInSection extends StatelessWidget {
               }
               return null;
             },
-            onChanged: (value) => password = value,
+            onChanged: (value) => formProvider.password = value,
             decoration: AppTheme.loginInputDecoration.copyWith(
               hintText: 'password'.tr,
               prefixIcon: const Icon(Icons.lock),
@@ -127,26 +125,26 @@ class _LogInSection extends StatelessWidget {
             child: Row(
               children: [
                 ElevatedButton(
-                  style: loginForm.isLoading ? null : TextButton.styleFrom(
+                  style: formProvider.isLoading ? null : TextButton.styleFrom(
                     backgroundColor: AppTheme.primaryColor,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10))
                     )
                   ),
-                  onPressed: loginForm.isLoading ? null : () async {
+                  onPressed: formProvider.isLoading ? null : () async {
                     
                     FocusScope.of(context).unfocus();
                     
-                    if( !loginForm.isValidForm() ) return;
+                    if( !formProvider.isValidForm() ) return;
                     
-                    loginForm.isLoading = true;
+                    formProvider.isLoading = true;
                     
                     //TODO: autenticacion con backend
                     // final authService = Provider.of<AuthService>(context, listen: false);
-                    // final String? errorMessage = await authService.login(loginForm.email, loginForm.password);
+                    // final String? errorMessage = await authService.login(formProvider.email, formProvider.password);
                     await Future.delayed(const Duration(seconds: 2));
 
-                    loginForm.isLoading = false;
+                    formProvider.isLoading = false;
                     ScaffoldMessenger.of(context).showSnackBar( CustomSnackBar(
                       color: const Color.fromARGB(255, 33, 117, 243),
                       borderColor: const Color.fromARGB(255, 68, 102, 255),
@@ -154,21 +152,21 @@ class _LogInSection extends StatelessWidget {
                     ));
                     Navigator.of(context).pop();
                     // if ( errorMessage == null ) {
-                    //   loginForm.isLoading = false;
+                    //   formProvider.isLoading = false;
                     //   Navigator.of(context).pop();
                     // }
                     // else {
                       // // TODO: mostrar error en pantalla
                       // print( errorMessage );
                     //   NotificationsService.showSnackbar(errorMessage);
-                    //   loginForm.isLoading = false;
+                    //   formProvider.isLoading = false;
                     // }
                     
-                    // loginForm.isLoading = false;
+                    // formProvider.isLoading = false;
                     // Navigator.of(context).pop();
                   },
                   child: Text(
-                     loginForm.isLoading
+                     formProvider.isLoading
                       ? 'wait'.tr
                       : 'log_in'.tr,
                     style: const TextStyle(

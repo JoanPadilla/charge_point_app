@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package grpc;
+
+service ChargePointAPIService{
+    
+    rpc AllChargingPoints(Empty) returns (AllChargePoints);
+    rpc StreamNotifier(Empty) returns (stream ChargePoint);
+    
+}
+
+message AllChargePoints{
+    repeated ChargePoint chargePointsList = 1;
+}
+
+message ChargePoint {
+    string name = 1;
+    string coordinates = 2;
+    bool available = 3;
+}
+
+message Empty{
+}
