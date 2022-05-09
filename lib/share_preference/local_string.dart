@@ -35,6 +35,7 @@ class LocalString extends Translations {
       'optional' : '(opcional)',
       'password' : 'Contraseña',
       'passwords_dont_match' : 'Las contraseñas no coinciden',
+      'receive_notifications' : 'Recibir notificaciones',
       'repeat_password' : 'Repita la contraseña',
       'route' : 'Ruta',
       'send' : 'Enviar',
@@ -84,6 +85,7 @@ class LocalString extends Translations {
       'start_time' : 'Start time',
       'subject' : 'Subject',
       'wait' : 'Wait',
+      'receive_notifications' : 'Receive notifications',
     },
     'ca_ES' : {
       'available_chargers' : 'Carregadors Disponibles',
@@ -124,6 +126,7 @@ class LocalString extends Translations {
       'start_time' : "Hora d'inici",
       'subject' : 'Concepte',
       'wait' : 'Espere',
+      'receive_notifications' : 'Rebre Notificacions',
     },
   };
 

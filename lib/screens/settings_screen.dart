@@ -52,17 +52,22 @@ class SettingsScreen extends StatelessWidget {
                       items: dropdownItems,
                       onChanged: ( value ) {
                         preferenceProvider.setLanguage(value);
-                        preferenceProvider.language = value!;
                       },
                     ),
                   ),
                 ],
               ),
               
-              
-              
               const Divider(
                 height: 50,
+              ),
+              
+              SwitchListTile.adaptive(
+                value: preferenceProvider.receiveNotifications,
+                title: Text('receive_notifications'.tr),
+                onChanged: ( value ) {
+                  preferenceProvider.setNotifications(value);
+                },
               ),
             ],
           ),

@@ -21,4 +21,12 @@ class Preference {
     _prefs.setStringList('language', _language);
   }
   
+  static bool get notifications {
+    var value = _prefs.getBool('notifications');
+    return value ?? false;
+  }
+  
+  static set notifications (bool value) {
+    _prefs.setBool('notifications', value);
+  }
 }
