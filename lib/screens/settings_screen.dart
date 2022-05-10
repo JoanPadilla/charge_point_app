@@ -1,5 +1,4 @@
 import 'package:charge_point_app/providers/providers.dart';
-import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -208,7 +207,7 @@ class _HelpSection extends StatelessWidget {
               return AlertDialog(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadiusDirectional.circular(15)),
                 elevation: 5,
-                title: Text('log_out'.tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),),
+                title: Text('log_out'.tr, textAlign: TextAlign.center, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w500),),
                 titlePadding: const EdgeInsets.only(bottom: 40, top: 30),
                 contentPadding: const EdgeInsets.all(0),
                 content: Container(

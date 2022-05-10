@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package grpc;
+
+service RechargesService {
+
+    rpc getHistory(Empty) returns (RechargeSet);
+}
+
+message RechargeSet {
+    repeated Recharge recharges = 1;
+}
+
+message Recharge {
+    int32 day = 1;
+    int32 month = 2;
+    int32 year = 3;
+    int32 hour = 4;
+    int32 minute = 5;
+    int32 duration = 6;
+    string chargePointId = 7;
+}
+
+message Empty {
+}

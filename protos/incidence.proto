@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package grpc;
+
+service IncidenceService {
+
+    rpc reportIncidence(Incidence) returns (Empty);
+}
+
+message Incidence {
+    string subject = 1;
+    string chargePointId = 2;
+    string description = 3;
+}
+
+
+message Empty {
+}

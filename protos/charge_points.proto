@@ -3,20 +3,27 @@ syntax = "proto3";
 package grpc;
 
 service ChargePointAPIService{
-    
-    rpc AllChargingPoints(Empty) returns (AllChargePoints);
+    rpc AllChargingPoints(Empty) returns (ChargePointSet);
     rpc StreamNotifier(Empty) returns (stream ChargePoint);
-    
+    rpc downloadImage(IdRequest) returns (ImageResponse);
 }
 
-message AllChargePoints{
-    repeated ChargePoint chargePointsList = 1;
+message ChargePointSet{
+    repeated ChargePoint chargePoints = 1;
 }
 
 message ChargePoint {
-    string name = 1;
+    string id = 1;
     string coordinates = 2;
     bool available = 3;
+}
+
+message IdRequest {
+    string id = 1;
+}
+
+message ImageResponse {
+    string bytes = 1;
 }
 
 message Empty{

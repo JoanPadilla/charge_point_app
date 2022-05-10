@@ -1,5 +1,4 @@
-import 'package:charge_point_app/models/models.dart';
-import 'package:charge_point_app/services/charge_point_client_adapter.dart';
+
 import 'package:charge_point_app/services/generated/charge_points.pbgrpc.dart';
 import 'package:grpc/grpc.dart';
 
@@ -9,7 +8,6 @@ class ChargePointClient {
   //TODO: gastar un proto per a cada tipus de servei?
   late final ClientChannel channel;
   late final ChargePointAPIServiceClient stub;
-  late final ChargePointClientAdapter adapter;
   
   ChargePointClient () {
     channel = ClientChannel(
@@ -18,19 +16,18 @@ class ChargePointClient {
       options: const ChannelOptions(credentials: ChannelCredentials.insecure())
     );
     stub = ChargePointAPIServiceClient(channel);
-    adapter = ChargePointClientAdapter();
   }
   
-  Future<List<ChargePoint>> getAllChargingPoints() async {
-    final request = Empty();
-    final call = await stub.allChargingPoints(request);
-    var chargePointList = call.chargePointsList;
-    return adapter.adaptCPList(chargePointList);
-  }
+  // Future<List<ChargePoint>> getAllChargingPoints() async {
+  //   final request = Empty();
+  //   final call = await stub.allChargingPoints(request);
+  //   var chargePointList = call.chargePointsList;
+  //   return adapter.adaptCPList(chargePointList);
+  // }
   
-  void closeChannel() {
-    channel.shutdown();
-  }
+  // void closeChannel() {
+  //   channel.shutdown();
+  // }
 }
   
   

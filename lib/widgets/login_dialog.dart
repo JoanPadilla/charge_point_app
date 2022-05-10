@@ -11,6 +11,8 @@ class CustomLoginDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    NotificationsProvider notificationsProvider = Provider.of<NotificationsProvider>(context, listen: false);
+    notificationsProvider.closeNotifications();
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),

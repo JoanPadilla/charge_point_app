@@ -3,6 +3,9 @@ import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/providers.dart';
 
 
 class ChargePointScreen extends StatelessWidget {
@@ -10,6 +13,8 @@ class ChargePointScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    NotificationsProvider notificationsProvider = Provider.of<NotificationsProvider>(context, listen: false);
+    notificationsProvider.closeNotifications();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 180,
