@@ -3,8 +3,8 @@ syntax = "proto3";
 package grpc;
 
 service ChargePointAPIService{
-    rpc AllChargingPoints(Empty) returns (ChargePointSet);
-    rpc StreamNotifier(Empty) returns (stream ChargePoint);
+    rpc AllChargingPoints(EmptyCPRequest) returns (ChargePointSet);
+    rpc StreamNotifier(EmptyCPRequest) returns (stream ChargePoint);
     rpc downloadImage(IdRequest) returns (ImageResponse);
 }
 
@@ -26,5 +26,5 @@ message ImageResponse {
     string bytes = 1;
 }
 
-message Empty{
+message EmptyCPRequest{
 }

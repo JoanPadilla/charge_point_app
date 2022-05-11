@@ -4,7 +4,7 @@ package grpc;
 
 service user{
     rpc login(LoginRequest) returns (APIResponse);
-    rpc logout(Empty) returns (APIResponse);
+    rpc logout(EmptyUserRequest) returns (APIResponse);
 }
 
 message LoginRequest{
@@ -17,5 +17,5 @@ message APIResponse{
     int32 responseCode = 2;
 }
 
-message Empty{
+message EmptyUserRequest{
 }

@@ -1,5 +1,5 @@
 
-import 'package:charge_point_app/services/generated/charge_points.pbgrpc.dart';
+import 'package:charge_point_app/services/generated/charge_point.pbgrpc.dart';
 import 'package:grpc/grpc.dart';
 
 class ChargePointClient {

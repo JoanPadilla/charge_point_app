@@ -1,5 +1,4 @@
 import 'package:charge_point_app/providers/notifications_provider.dart';
-import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +25,7 @@ class NotificationsDropdown extends StatelessWidget {
         padding: const EdgeInsets.all(3),
         decoration: ShapeDecoration(
           // color: const Color.fromARGB(255, 12, 87, 158),
-          color: Color.fromARGB(255, 29, 158, 98),
+          color: const Color.fromARGB(255, 29, 158, 98),
           shape: _NotificationsWindowBorder()
         ),
         child: Container(

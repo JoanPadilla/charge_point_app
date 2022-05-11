@@ -4,7 +4,7 @@ package grpc;
 
 service IncidenceService {
 
-    rpc reportIncidence(Incidence) returns (Empty);
+    rpc reportIncidence(Incidence) returns (EmptyIncidenceResponse);
 }
 
 message Incidence {
@@ -14,5 +14,5 @@ message Incidence {
 }
 
 
-message Empty {
+message EmptyIncidenceResponse {
 }

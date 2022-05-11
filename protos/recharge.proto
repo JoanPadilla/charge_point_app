@@ -4,7 +4,7 @@ package grpc;
 
 service RechargesService {
 
-    rpc getHistory(Empty) returns (RechargeSet);
+    rpc getHistory(EmptyHistoryRequest) returns (RechargeSet);
 }
 
 message RechargeSet {
@@ -21,5 +21,5 @@ message Recharge {
     string chargePointId = 7;
 }
 
-message Empty {
+message EmptyHistoryRequest {
 }
