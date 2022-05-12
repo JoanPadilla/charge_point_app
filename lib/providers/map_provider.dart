@@ -1,65 +1,86 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:charge_point_app/services/generated/charge_point.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapProvider extends ChangeNotifier{
-  
+class MapProvider extends ChangeNotifier {
   final CameraPosition initialPosition = const CameraPosition(
-      target: LatLng(39.994427, -0.068448),
-      zoom: 16,
-      tilt: 15
-    );
-    
+      target: LatLng(39.994427, -0.068448), zoom: 16, tilt: 15);
+
   final markers = <Marker>{};
   String? mapStyle;
   Uint8List? markerIconAvailable;
   Uint8List? markerIconUnavailable;
   bool loading = true;
-  
+
   MapProvider() {
     rootBundle.loadString('assets/map_style2.txt').then((string) {
       mapStyle = string;
     });
-    
+
     _init();
   }
-  
+
   void _init() async {
     await _loadMarkersIcon();
-    await _addInitialMarkers();
+    // await _addInitialMarkers();
     loading = false;
     notifyListeners();
   }
-  
-  _addInitialMarkers() async {
-    //TODO: temporal
-    markers.add(Marker(
-      markerId: const MarkerId('P1'),
-      icon: BitmapDescriptor.fromBytes(markerIconAvailable!),
-      infoWindow: const InfoWindow(title: 'P1', snippet: 'Disponible'),
-      position: const LatLng(39.992403, -0.069522),
-    ));
-    markers.add(Marker(
-      markerId: const MarkerId('P2'),
-      icon: BitmapDescriptor.fromBytes(markerIconUnavailable!),
-      infoWindow: const InfoWindow(title: 'P2', snippet: 'No disponible'),
-      position: const LatLng(39.992210, -0.067252),
-    ));
+
+  addMarkers(List<ChargePoint> chargePointList) async {
+    markers.clear();
+    for (var chargePoint in chargePointList) {
+      var coords = chargePoint.coordinates.split(',');
+      markers.add(Marker(
+        markerId: MarkerId(chargePoint.id),
+        icon: chargePoint.available
+            ? BitmapDescriptor.fromBytes(markerIconAvailable!)
+            : BitmapDescriptor.fromBytes(markerIconUnavailable!),
+        infoWindow: InfoWindow(title: chargePoint.id, snippet: 
+          chargePoint.available
+          ? 'Disponible'
+          : 'No disponible'),
+        position: LatLng(double.parse(coords[0]), double.parse(coords[1])),
+      ));
+    }
+    notifyListeners();
   }
-  
+
+  // _addInitialMarkers() async {
+  //   //TODO: temporal
+  //   markers.add(Marker(
+  //     markerId: const MarkerId('P1'),
+  //     icon: BitmapDescriptor.fromBytes(markerIconAvailable!),
+  //     infoWindow: const InfoWindow(title: 'P1', snippet: 'Disponible'),
+  //     position: const LatLng(39.992403, -0.069522),
+  //   ));
+  //   markers.add(Marker(
+  //     markerId: const MarkerId('P2'),
+  //     icon: BitmapDescriptor.fromBytes(markerIconUnavailable!),
+  //     infoWindow: const InfoWindow(title: 'P2', snippet: 'No disponible'),
+  //     position: const LatLng(39.992210, -0.067252),
+  //   ));
+  // }
+
   _loadMarkersIcon() async {
-    markerIconAvailable = await _getBytesFromAsset('assets/markers/marker_available.png', 100);
-    markerIconUnavailable = await _getBytesFromAsset('assets/markers/marker_unavailable.png', 100);
+    markerIconAvailable =
+        await _getBytesFromAsset('assets/markers/marker_available.png', 100);
+    markerIconUnavailable =
+        await _getBytesFromAsset('assets/markers/marker_unavailable.png', 100);
   }
-  
+
   Future<Uint8List> _getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
     // markerIcon = await BitmapDescriptor.fromAssetImage(const ImageConfiguration(), 'assets/charger_marker.png');
   }
 }

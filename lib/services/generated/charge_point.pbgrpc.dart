@@ -13,24 +13,24 @@ import 'package:grpc/service_api.dart' as $grpc;
 import 'charge_point.pb.dart' as $0;
 export 'charge_point.pb.dart';
 
-class ChargePointAPIServiceClient extends $grpc.Client {
+class ChargePointServiceClient extends $grpc.Client {
   static final _$allChargingPoints =
       $grpc.ClientMethod<$0.EmptyCPRequest, $0.ChargePointSet>(
-          '/grpc.ChargePointAPIService/AllChargingPoints',
+          '/charge_point_app.ChargePointService/AllChargingPoints',
           ($0.EmptyCPRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.ChargePointSet.fromBuffer(value));
   static final _$streamNotifier =
       $grpc.ClientMethod<$0.EmptyCPRequest, $0.ChargePoint>(
-          '/grpc.ChargePointAPIService/StreamNotifier',
+          '/charge_point_app.ChargePointService/StreamNotifier',
           ($0.EmptyCPRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.ChargePoint.fromBuffer(value));
   static final _$downloadImage =
-      $grpc.ClientMethod<$0.IdRequest, $0.ImageResponse>(
-          '/grpc.ChargePointAPIService/downloadImage',
-          ($0.IdRequest value) => value.writeToBuffer(),
+      $grpc.ClientMethod<$0.ImageRequest, $0.ImageResponse>(
+          '/charge_point_app.ChargePointService/downloadImage',
+          ($0.ImageRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.ImageResponse.fromBuffer(value));
 
-  ChargePointAPIServiceClient($grpc.ClientChannel channel,
+  ChargePointServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
@@ -48,16 +48,16 @@ class ChargePointAPIServiceClient extends $grpc.Client {
         options: options);
   }
 
-  $grpc.ResponseFuture<$0.ImageResponse> downloadImage($0.IdRequest request,
+  $grpc.ResponseFuture<$0.ImageResponse> downloadImage($0.ImageRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$downloadImage, request, options: options);
   }
 }
 
-abstract class ChargePointAPIServiceBase extends $grpc.Service {
-  $core.String get $name => 'grpc.ChargePointAPIService';
+abstract class ChargePointServiceBase extends $grpc.Service {
+  $core.String get $name => 'charge_point_app.ChargePointService';
 
-  ChargePointAPIServiceBase() {
+  ChargePointServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.EmptyCPRequest, $0.ChargePointSet>(
         'AllChargingPoints',
         allChargingPoints_Pre,
@@ -72,12 +72,12 @@ abstract class ChargePointAPIServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.EmptyCPRequest.fromBuffer(value),
         ($0.ChargePoint value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.IdRequest, $0.ImageResponse>(
+    $addMethod($grpc.ServiceMethod<$0.ImageRequest, $0.ImageResponse>(
         'downloadImage',
         downloadImage_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.IdRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $0.ImageRequest.fromBuffer(value),
         ($0.ImageResponse value) => value.writeToBuffer()));
   }
 
@@ -92,7 +92,7 @@ abstract class ChargePointAPIServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ImageResponse> downloadImage_Pre(
-      $grpc.ServiceCall call, $async.Future<$0.IdRequest> request) async {
+      $grpc.ServiceCall call, $async.Future<$0.ImageRequest> request) async {
     return downloadImage(call, await request);
   }
 
@@ -101,5 +101,5 @@ abstract class ChargePointAPIServiceBase extends $grpc.Service {
   $async.Stream<$0.ChargePoint> streamNotifier(
       $grpc.ServiceCall call, $0.EmptyCPRequest request);
   $async.Future<$0.ImageResponse> downloadImage(
-      $grpc.ServiceCall call, $0.IdRequest request);
+      $grpc.ServiceCall call, $0.ImageRequest request);
 }

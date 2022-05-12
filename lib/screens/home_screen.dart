@@ -1,3 +1,4 @@
+import 'package:charge_point_app/providers/charge_point_provider.dart';
 import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/widgets/widgets.dart';
@@ -5,30 +6,45 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: Text('home'.tr),
         actions: [
           const _NotificationsButton(),
-          const SizedBox(width:20),
+          const SizedBox(width: 20),
           Container(
             margin: const EdgeInsets.only(right: 10),
             width: 45,
             padding: const EdgeInsets.all(0),
             child: FittedBox(
-              child: IconButton(onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => const CustomLoginDialog(),
-                );
-              }, icon: const Icon(Icons.person, color: Colors.black54, size: 30,)),
+              child: IconButton(
+                  onPressed: () {
+                    NotificationsProvider notificationsProvider =
+                        Provider.of<NotificationsProvider>(context,
+                            listen: false);
+                    notificationsProvider.closeNotifications();
+                    UserProvider userProvider =
+                        Provider.of<UserProvider>(context,
+                            listen: false);
+                    if (userProvider.token == null){
+                      showDialog(
+                        context: context,
+                        builder: (context) => const CustomLoginDialog(),
+                      );
+                    } else {
+                      
+                    }
+                  },
+                  icon: const Icon(
+                    Icons.person,
+                    color: Colors.black54,
+                    size: 30,
+                  )),
               fit: BoxFit.cover,
             ),
             decoration: BoxDecoration(
@@ -49,17 +65,20 @@ class HomeScreen extends StatelessWidget {
           //TODO: custom_info_window per al mapa
           const ChargePointsMap(),
           Divider(
-          thickness: 1,
-          height: 1,
-          color: AppTheme.primaryColor.withOpacity(0.2)
-        ),
+              thickness: 1,
+              height: 1,
+              color: AppTheme.primaryColor.withOpacity(0.2)),
           Expanded(
             child: ListView(
               children: [
-                const SizedBox(height: 25,),
+                const SizedBox(
+                  height: 25,
+                ),
                 Row(
                   children: [
-                    const SizedBox(width: 30,),
+                    const SizedBox(
+                      width: 30,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -67,16 +86,20 @@ class HomeScreen extends StatelessWidget {
                           'available_chargers'.tr,
                           textAlign: TextAlign.left,
                           style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700
-                          ),
+                              fontSize: 24, fontWeight: FontWeight.w700),
                         ),
-                        Container(height: 4, width: 170, color: AppTheme.primaryColor,),
+                        Container(
+                          height: 4,
+                          width: 170,
+                          color: AppTheme.primaryColor,
+                        ),
                       ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 const _CustomTable(),
               ],
             ),
@@ -99,16 +122,25 @@ class _NotificationsButton extends StatelessWidget {
       key: provider.key,
       onPressed: () {
         provider.notificaciones = !provider.notificaciones;
-        provider.isMenuOpen ? provider.closeNotifications() : provider.openNotifications(context);
+        provider.isMenuOpen
+            ? provider.closeNotifications()
+            : provider.openNotifications(context);
       },
       icon: Stack(
-        children: <Widget> [
-          const Center(child: Icon(Icons.notifications, color: Colors.white, size: 25,),),
-          if (provider.notificaciones) const Positioned(
-            child: Icon(Icons.brightness_1, color: Colors.red, size: 12),
-            left: 17,
-            top: 9,
+        children: <Widget>[
+          const Center(
+            child: Icon(
+              Icons.notifications,
+              color: Colors.white,
+              size: 25,
+            ),
           ),
+          if (provider.notificaciones)
+            const Positioned(
+              child: Icon(Icons.brightness_1, color: Colors.red, size: 12),
+              left: 17,
+              top: 9,
+            ),
         ],
       ),
     );
@@ -122,92 +154,17 @@ class _CustomTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      defaultColumnWidth: const FixedColumnWidth(120),
-      children: const [
-        TableRow(
-          children: [
-            _ChargePointButton(available: true, name: 'P1',),
-            _ChargePointButton(available: true, name: 'P2',),
-            _ChargePointButton(available: false, name: 'P3',),
-          ]
-        ),
-        TableRow(
-          children: [
-            _ChargePointButton(available: false, name: 'P4',),
-            _ChargePointButton(available: false, name: 'P5',),
-            _ChargePointButton(available: true, name: 'P6',),
-          ]
-        ),
-        TableRow(
-          children: [
-            _ChargePointButton(available: false, name: 'P7',),
-            _ChargePointButton(available: true, name: 'P8',),
-            _ChargePointButton(available: true, name: 'P9',),
-          ]
-        ),
-        TableRow(
-          children: [
-            _ChargePointButton(available: true, name: 'P10',),
-            _ChargePointButton(available: false, name: 'P11',),
-            _ChargePointButton(available: true, name: 'P12',),
-          ]
-        ),
-      ],
-    );
+    final chargePointProvider = Provider.of<ChargePointProvider>(context);
+    return chargePointProvider.getTableRows().isEmpty
+        ? Container(
+            margin: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+            height: 200,
+            child: const CircularProgressIndicator.adaptive(),
+          )
+        : Table(
+            defaultColumnWidth: const FixedColumnWidth(120),
+            children: chargePointProvider.getTableRows(),
+          );
   }
 }
-
-class _ChargePointButton extends StatelessWidget {
-  
-  final bool available;
-  final String name;
-  
-  const _ChargePointButton({
-    Key? key,
-    required this.available,
-    required this.name,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 50,
-      margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
-      
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          elevation: 11,
-          primary: Colors.transparent,
-          onPrimary: Colors.white,
-          padding: const EdgeInsets.all(0.0),
-          shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20)))
-        ),
-        onPressed: !available ? null : () {
-          Navigator.pushNamed(context, 'charge_point');
-        },
-        child: Ink(
-            decoration: BoxDecoration(
-            gradient: available ? const LinearGradient(
-              colors: [
-                Color.fromARGB(255, 189, 164, 206),
-                AppTheme.primaryColor,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.centerRight,
-                stops: [0.05,0.35],
-              ) : null,
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-          ),
-          child: SizedBox(
-            height: 70,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(name, style: const TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold))),
-          ),
-        ),
-      ),
-    );
-  }
-}
-

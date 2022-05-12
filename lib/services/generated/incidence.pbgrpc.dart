@@ -16,7 +16,7 @@ export 'incidence.pb.dart';
 class IncidenceServiceClient extends $grpc.Client {
   static final _$reportIncidence =
       $grpc.ClientMethod<$1.Incidence, $1.EmptyIncidenceResponse>(
-          '/grpc.IncidenceService/reportIncidence',
+          '/charge_point_app.IncidenceService/reportIncidence',
           ($1.Incidence value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $1.EmptyIncidenceResponse.fromBuffer(value));
@@ -34,7 +34,7 @@ class IncidenceServiceClient extends $grpc.Client {
 }
 
 abstract class IncidenceServiceBase extends $grpc.Service {
-  $core.String get $name => 'grpc.IncidenceService';
+  $core.String get $name => 'charge_point_app.IncidenceService';
 
   IncidenceServiceBase() {
     $addMethod($grpc.ServiceMethod<$1.Incidence, $1.EmptyIncidenceResponse>(

@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package grpc;
+package charge_point_app;
 
-service ChargePointAPIService{
+service ChargePointService{
     rpc AllChargingPoints(EmptyCPRequest) returns (ChargePointSet);
     rpc StreamNotifier(EmptyCPRequest) returns (stream ChargePoint);
-    rpc downloadImage(IdRequest) returns (ImageResponse);
+    rpc downloadImage(ImageRequest) returns (ImageResponse);
 }
 
 message ChargePointSet{
@@ -18,12 +18,12 @@ message ChargePoint {
     bool available = 3;
 }
 
-message IdRequest {
-    string id = 1;
+message ImageRequest {
+    string chargePointId = 1;
 }
 
 message ImageResponse {
-    string bytes = 1;
+    bytes imageBytes = 1;
 }
 
 message EmptyCPRequest{

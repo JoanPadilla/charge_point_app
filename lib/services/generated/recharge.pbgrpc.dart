@@ -16,7 +16,7 @@ export 'recharge.pb.dart';
 class RechargesServiceClient extends $grpc.Client {
   static final _$getHistory =
       $grpc.ClientMethod<$2.EmptyHistoryRequest, $2.RechargeSet>(
-          '/grpc.RechargesService/getHistory',
+          '/charge_point_app.RechargesService/getHistory',
           ($2.EmptyHistoryRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $2.RechargeSet.fromBuffer(value));
 
@@ -33,7 +33,7 @@ class RechargesServiceClient extends $grpc.Client {
 }
 
 abstract class RechargesServiceBase extends $grpc.Service {
-  $core.String get $name => 'grpc.RechargesService';
+  $core.String get $name => 'charge_point_app.RechargesService';
 
   RechargesServiceBase() {
     $addMethod($grpc.ServiceMethod<$2.EmptyHistoryRequest, $2.RechargeSet>(

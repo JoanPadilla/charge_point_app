@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class ChargePointSet extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ChargePointSet', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grpc'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ChargePointSet', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'charge_point_app'), createEmptyInstance: create)
     ..pc<ChargePoint>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'chargePoints', $pb.PbFieldType.PM, protoName: 'chargePoints', subBuilder: ChargePoint.create)
     ..hasRequiredFields = false
   ;
@@ -51,7 +51,7 @@ class ChargePointSet extends $pb.GeneratedMessage {
 }
 
 class ChargePoint extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ChargePoint', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grpc'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ChargePoint', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'charge_point_app'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'coordinates')
     ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'available')
@@ -125,66 +125,66 @@ class ChargePoint extends $pb.GeneratedMessage {
   void clearAvailable() => clearField(3);
 }
 
-class IdRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'IdRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grpc'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
+class ImageRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'charge_point_app'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'chargePointId', protoName: 'chargePointId')
     ..hasRequiredFields = false
   ;
 
-  IdRequest._() : super();
-  factory IdRequest({
-    $core.String? id,
+  ImageRequest._() : super();
+  factory ImageRequest({
+    $core.String? chargePointId,
   }) {
     final _result = create();
-    if (id != null) {
-      _result.id = id;
+    if (chargePointId != null) {
+      _result.chargePointId = chargePointId;
     }
     return _result;
   }
-  factory IdRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory IdRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory ImageRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ImageRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  IdRequest clone() => IdRequest()..mergeFromMessage(this);
+  ImageRequest clone() => ImageRequest()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  IdRequest copyWith(void Function(IdRequest) updates) => super.copyWith((message) => updates(message as IdRequest)) as IdRequest; // ignore: deprecated_member_use
+  ImageRequest copyWith(void Function(ImageRequest) updates) => super.copyWith((message) => updates(message as ImageRequest)) as ImageRequest; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static IdRequest create() => IdRequest._();
-  IdRequest createEmptyInstance() => create();
-  static $pb.PbList<IdRequest> createRepeated() => $pb.PbList<IdRequest>();
+  static ImageRequest create() => ImageRequest._();
+  ImageRequest createEmptyInstance() => create();
+  static $pb.PbList<ImageRequest> createRepeated() => $pb.PbList<ImageRequest>();
   @$core.pragma('dart2js:noInline')
-  static IdRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<IdRequest>(create);
-  static IdRequest? _defaultInstance;
+  static ImageRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageRequest>(create);
+  static ImageRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  $core.String get chargePointId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set id($core.String v) { $_setString(0, v); }
+  set chargePointId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
+  $core.bool hasChargePointId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearId() => clearField(1);
+  void clearChargePointId() => clearField(1);
 }
 
 class ImageResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grpc'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bytes')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'charge_point_app'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'imageBytes', $pb.PbFieldType.OY, protoName: 'imageBytes')
     ..hasRequiredFields = false
   ;
 
   ImageResponse._() : super();
   factory ImageResponse({
-    $core.String? bytes,
+    $core.List<$core.int>? imageBytes,
   }) {
     final _result = create();
-    if (bytes != null) {
-      _result.bytes = bytes;
+    if (imageBytes != null) {
+      _result.imageBytes = imageBytes;
     }
     return _result;
   }
@@ -210,17 +210,17 @@ class ImageResponse extends $pb.GeneratedMessage {
   static ImageResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get bytes => $_getSZ(0);
+  $core.List<$core.int> get imageBytes => $_getN(0);
   @$pb.TagNumber(1)
-  set bytes($core.String v) { $_setString(0, v); }
+  set imageBytes($core.List<$core.int> v) { $_setBytes(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasBytes() => $_has(0);
+  $core.bool hasImageBytes() => $_has(0);
   @$pb.TagNumber(1)
-  void clearBytes() => clearField(1);
+  void clearImageBytes() => clearField(1);
 }
 
 class EmptyCPRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'EmptyCPRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grpc'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'EmptyCPRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'charge_point_app'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 

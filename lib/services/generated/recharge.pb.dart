@@ -9,8 +9,11 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'google/protobuf/timestamp.pb.dart' as $4;
+import 'charge_point.pb.dart' as $0;
+
 class RechargeSet extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RechargeSet', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grpc'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RechargeSet', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'charge_point_app'), createEmptyInstance: create)
     ..pc<Recharge>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'recharges', $pb.PbFieldType.PM, subBuilder: Recharge.create)
     ..hasRequiredFields = false
   ;
@@ -51,48 +54,28 @@ class RechargeSet extends $pb.GeneratedMessage {
 }
 
 class Recharge extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Recharge', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grpc'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'day', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'month', $pb.PbFieldType.O3)
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'year', $pb.PbFieldType.O3)
-    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hour', $pb.PbFieldType.O3)
-    ..a<$core.int>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'minute', $pb.PbFieldType.O3)
-    ..a<$core.int>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'duration', $pb.PbFieldType.O3)
-    ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'chargePointId', protoName: 'chargePointId')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Recharge', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'charge_point_app'), createEmptyInstance: create)
+    ..aOM<$4.Timestamp>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dateTime', protoName: 'dateTime', subBuilder: $4.Timestamp.create)
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'duration', $pb.PbFieldType.O3)
+    ..aOM<$0.ChargePoint>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'chargePoint', protoName: 'chargePoint', subBuilder: $0.ChargePoint.create)
     ..hasRequiredFields = false
   ;
 
   Recharge._() : super();
   factory Recharge({
-    $core.int? day,
-    $core.int? month,
-    $core.int? year,
-    $core.int? hour,
-    $core.int? minute,
+    $4.Timestamp? dateTime,
     $core.int? duration,
-    $core.String? chargePointId,
+    $0.ChargePoint? chargePoint,
   }) {
     final _result = create();
-    if (day != null) {
-      _result.day = day;
-    }
-    if (month != null) {
-      _result.month = month;
-    }
-    if (year != null) {
-      _result.year = year;
-    }
-    if (hour != null) {
-      _result.hour = hour;
-    }
-    if (minute != null) {
-      _result.minute = minute;
+    if (dateTime != null) {
+      _result.dateTime = dateTime;
     }
     if (duration != null) {
       _result.duration = duration;
     }
-    if (chargePointId != null) {
-      _result.chargePointId = chargePointId;
+    if (chargePoint != null) {
+      _result.chargePoint = chargePoint;
     }
     return _result;
   }
@@ -118,71 +101,39 @@ class Recharge extends $pb.GeneratedMessage {
   static Recharge? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get day => $_getIZ(0);
+  $4.Timestamp get dateTime => $_getN(0);
   @$pb.TagNumber(1)
-  set day($core.int v) { $_setSignedInt32(0, v); }
+  set dateTime($4.Timestamp v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasDay() => $_has(0);
+  $core.bool hasDateTime() => $_has(0);
   @$pb.TagNumber(1)
-  void clearDay() => clearField(1);
+  void clearDateTime() => clearField(1);
+  @$pb.TagNumber(1)
+  $4.Timestamp ensureDateTime() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.int get month => $_getIZ(1);
+  $core.int get duration => $_getIZ(1);
   @$pb.TagNumber(2)
-  set month($core.int v) { $_setSignedInt32(1, v); }
+  set duration($core.int v) { $_setSignedInt32(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasMonth() => $_has(1);
+  $core.bool hasDuration() => $_has(1);
   @$pb.TagNumber(2)
-  void clearMonth() => clearField(2);
+  void clearDuration() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get year => $_getIZ(2);
+  $0.ChargePoint get chargePoint => $_getN(2);
   @$pb.TagNumber(3)
-  set year($core.int v) { $_setSignedInt32(2, v); }
+  set chargePoint($0.ChargePoint v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasYear() => $_has(2);
+  $core.bool hasChargePoint() => $_has(2);
   @$pb.TagNumber(3)
-  void clearYear() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.int get hour => $_getIZ(3);
-  @$pb.TagNumber(4)
-  set hour($core.int v) { $_setSignedInt32(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasHour() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearHour() => clearField(4);
-
-  @$pb.TagNumber(5)
-  $core.int get minute => $_getIZ(4);
-  @$pb.TagNumber(5)
-  set minute($core.int v) { $_setSignedInt32(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasMinute() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearMinute() => clearField(5);
-
-  @$pb.TagNumber(6)
-  $core.int get duration => $_getIZ(5);
-  @$pb.TagNumber(6)
-  set duration($core.int v) { $_setSignedInt32(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasDuration() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearDuration() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $core.String get chargePointId => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set chargePointId($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasChargePointId() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearChargePointId() => clearField(7);
+  void clearChargePoint() => clearField(3);
+  @$pb.TagNumber(3)
+  $0.ChargePoint ensureChargePoint() => $_ensure(2);
 }
 
 class EmptyHistoryRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'EmptyHistoryRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grpc'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'EmptyHistoryRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'charge_point_app'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 

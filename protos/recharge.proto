@@ -1,9 +1,10 @@
 syntax = "proto3";
 
-package grpc;
+import "google/protobuf/timestamp.proto";
+import "charge_point.proto";
+package charge_point_app;
 
 service RechargesService {
-
     rpc getHistory(EmptyHistoryRequest) returns (RechargeSet);
 }
 
@@ -12,13 +13,9 @@ message RechargeSet {
 }
 
 message Recharge {
-    int32 day = 1;
-    int32 month = 2;
-    int32 year = 3;
-    int32 hour = 4;
-    int32 minute = 5;
-    int32 duration = 6;
-    string chargePointId = 7;
+    google.protobuf.Timestamp dateTime = 1;
+    int32 duration = 2;
+    charge_point_app.ChargePoint chargePoint = 3;
 }
 
 message EmptyHistoryRequest {

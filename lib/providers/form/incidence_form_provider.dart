@@ -1,4 +1,4 @@
-import 'package:charge_point_app/providers/form_provider.dart';
+import 'package:charge_point_app/providers/form/form_provider.dart';
 
 class IncidenceFormProvider extends FormProvider {
   

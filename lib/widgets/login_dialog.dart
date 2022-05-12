@@ -11,8 +11,6 @@ class CustomLoginDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NotificationsProvider notificationsProvider = Provider.of<NotificationsProvider>(context, listen: false);
-    notificationsProvider.closeNotifications();
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
@@ -141,31 +139,23 @@ class _LogInSection extends StatelessWidget {
                     
                     formProvider.isLoading = true;
                     
-                    //TODO: autenticacion con backend
-                    // final authService = Provider.of<AuthService>(context, listen: false);
-                    // final String? errorMessage = await authService.login(formProvider.email, formProvider.password);
-                    await Future.delayed(const Duration(seconds: 2));
-
+                    final userProvider = Provider.of<UserProvider>(context, listen: false);
+                    final bool logged = await userProvider.login(formProvider.email, formProvider.password);
                     formProvider.isLoading = false;
-                    ScaffoldMessenger.of(context).showSnackBar( CustomSnackBar(
-                      color: const Color.fromARGB(255, 33, 117, 243),
-                      borderColor: const Color.fromARGB(255, 68, 102, 255),
-                      text: 'logged_in'.tr,
-                    ));
-                    Navigator.of(context).pop();
-                    // if ( errorMessage == null ) {
-                    //   formProvider.isLoading = false;
-                    //   Navigator.of(context).pop();
-                    // }
-                    // else {
-                      // // TODO: mostrar error en pantalla
-                      // print( errorMessage );
-                    //   NotificationsService.showSnackbar(errorMessage);
-                    //   formProvider.isLoading = false;
-                    // }
-                    
-                    // formProvider.isLoading = false;
-                    // Navigator.of(context).pop();
+                    if (logged) {
+                      ScaffoldMessenger.of(context).showSnackBar( CustomSnackBar(
+                        color: const Color.fromARGB(255, 33, 117, 243),
+                        borderColor: const Color.fromARGB(255, 68, 102, 255),
+                        text: 'logged_in'.tr,
+                      ));
+                      Navigator.of(context).pop();
+                    }
+                    //TODO: el mensaje se muestra por debajo del dialogo
+                    // ScaffoldMessenger.of(context).showSnackBar( CustomSnackBar(
+                    //   color: const Color.fromARGB(255, 33, 117, 243),
+                    //   borderColor: const Color.fromARGB(255, 68, 102, 255),
+                    //   text: 'coult_not_login'.tr,
+                    // ));
                   },
                   child: Text(
                      formProvider.isLoading

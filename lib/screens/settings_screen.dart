@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-
+//TODO: Apartat mostrant usuari si te sessio iniciada
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({ Key? key }) : super(key: key);
 

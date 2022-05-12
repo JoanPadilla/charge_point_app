@@ -52,9 +52,10 @@ class LocalString extends Translations {
       'version' : 'Versión',
       'wait' : 'Espere',
       'yes' : 'Si',
+      'could_not_login' : 'No se ha podido iniciar sessión',
     },
     'en_UK' : {
-      'available_chargers' : 'Available charging points',
+      'available_chargers' : 'Available Charging Points',
       'available' : 'Available',
       'book' : 'Book',
       'charger' : 'Charger',
@@ -100,6 +101,7 @@ class LocalString extends Translations {
       'version' : 'Version',
       'wait' : 'Wait',
       'yes' : 'Yes',
+      'could_not_login' : 'Failed to log in',
     },
     'ca_ES' : {
       'available_chargers' : 'Carregadors Disponibles',
@@ -148,6 +150,7 @@ class LocalString extends Translations {
       'version' : 'Versió',
       'wait' : 'Espere',
       'yes' : 'Si',
+      'could_not_login' : "No s'ha iniciar sessió",
     },
   };
 

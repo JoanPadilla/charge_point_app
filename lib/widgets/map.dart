@@ -18,9 +18,28 @@ class _MapState extends State<ChargePointsMap> {
   final Completer<GoogleMapController> _mapController = Completer();
   
   @override
+  void initState() {
+    final mapProvider = Provider.of<MapProvider>(context, listen: false);
+    final chargePointProvider = Provider.of<ChargePointProvider>(context, listen: false);
+    final chargePoints = chargePointProvider.getChargePoints();
+    chargePoints.then((value) {
+      mapProvider.addMarkers(value);
+      setState(() {
+        
+      });
+    },);
+  }
+  
+  @override
   Widget build(BuildContext context) {
     
     final mapProvider = Provider.of<MapProvider>(context);
+    // final chargePointProvider = Provider.of<ChargePointProvider>(context, listen: false);
+    // final chargePoints = chargePointProvider.getChargePoints();
+    
+    // chargePoints.then((value) {
+    //   mapProvider.addMarkers(value);
+    // },);
     
     return SizedBox(
       height: MediaQuery.of(context).size.height / 7 * 3,
