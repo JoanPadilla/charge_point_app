@@ -1,4 +1,5 @@
 import 'package:charge_point_app/providers/providers.dart';
+import 'package:charge_point_app/services/user_service.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -139,8 +140,7 @@ class _LogInSection extends StatelessWidget {
                     
                     formProvider.isLoading = true;
                     
-                    final userProvider = Provider.of<UserProvider>(context, listen: false);
-                    final bool logged = await userProvider.login(formProvider.email, formProvider.password);
+                    final bool logged = await UserService.login(formProvider.email, formProvider.password);
                     formProvider.isLoading = false;
                     if (logged) {
                       ScaffoldMessenger.of(context).showSnackBar( CustomSnackBar(

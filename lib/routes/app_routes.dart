@@ -9,8 +9,8 @@ class AppRoutes {
   
   static final menuOptions = <MenuOption>[
     MenuOption(route: 'home', icon: Icons.home, name: 'home', screen: const HomeScreen()),
-    MenuOption(route: 'record', icon: Icons.library_books_rounded, name: 'history', screen: const HistoryScreen()),
-    MenuOption(route: 'incidence', icon: Icons.warning_amber_rounded, name: 'incidences', screen: const IncidenceScreen()),
+    MenuOption(route: 'record', icon: Icons.library_books_rounded, name: 'history', screen: const HistoryScreen(), authNeeded: true),
+    MenuOption(route: 'incidence', icon: Icons.warning_amber_rounded, name: 'incidences', screen: const IncidenceScreen(), authNeeded: true),
     MenuOption(route: 'settings', icon: Icons.settings, name: 'settings', screen: const SettingsScreen()),
   ];
   

@@ -10,7 +10,7 @@ class MapProvider extends ChangeNotifier {
   final CameraPosition initialPosition = const CameraPosition(
       target: LatLng(39.994427, -0.068448), zoom: 16, tilt: 15);
 
-  final markers = <Marker>{};
+  // final markers = <Marker>{};
   String? mapStyle;
   Uint8List? markerIconAvailable;
   Uint8List? markerIconUnavailable;
@@ -31,8 +31,9 @@ class MapProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  addMarkers(List<ChargePoint> chargePointList) async {
-    markers.clear();
+  Set<Marker> getMarkers(List<ChargePoint>? chargePointList) {
+    if (chargePointList == null) return {};
+    Set<Marker> markers = {};
     for (var chargePoint in chargePointList) {
       var coords = chargePoint.coordinates.split(',');
       markers.add(Marker(
@@ -47,8 +48,28 @@ class MapProvider extends ChangeNotifier {
         position: LatLng(double.parse(coords[0]), double.parse(coords[1])),
       ));
     }
-    notifyListeners();
+    return markers;
   }
+
+  // void addMarkers(List<ChargePoint>? chargePointList) async {
+  //   if (chargePointList == null) return;
+  //   markers.clear();
+  //   for (var chargePoint in chargePointList) {
+  //     var coords = chargePoint.coordinates.split(',');
+  //     markers.add(Marker(
+  //       markerId: MarkerId(chargePoint.id),
+  //       icon: chargePoint.available
+  //           ? BitmapDescriptor.fromBytes(markerIconAvailable!)
+  //           : BitmapDescriptor.fromBytes(markerIconUnavailable!),
+  //       infoWindow: InfoWindow(title: chargePoint.id, snippet: 
+  //         chargePoint.available
+  //         ? 'Disponible'
+  //         : 'No disponible'),
+  //       position: LatLng(double.parse(coords[0]), double.parse(coords[1])),
+  //     ));
+  //   }
+  //   notifyListeners();
+  // }
 
   // _addInitialMarkers() async {
   //   //TODO: temporal

@@ -6,76 +6,69 @@ import 'package:synchronized/synchronized.dart';
 
 class ChargePointProvider extends ChangeNotifier {
   
-  List<ChargePoint>? _chargePoints;
+  List<ChargePoint>? chargePoints;
   
-  Future<List<ChargePoint>> getChargePoints() async{
-    print('Entro');
-    var lock = Lock();
-    await lock.synchronized(() async {
-      if (_chargePoints == null) {
-        var serviceManager = GrpcServiceManager();
-        var chargePointRequest = await serviceManager.getAllChargePoints();
-        _chargePoints = chargePointRequest.chargePoints;
-        print('he pedido');
-      }
-    });
-    print('Salgo con ${_chargePoints!.length}');
-    return _chargePoints!;
+  void setChargePointList(List<ChargePoint> list) {
+    chargePoints = list;
+    notifyListeners();
   }
   
-  final List<TableRow> _tableRows = [];
+  // Future<List<ChargePoint>> getChargePoints() async{
+  //   print('Entro');
+  //   var lock = Lock();
+  //   await lock.synchronized(() async {
+  //     if (_chargePoints == null) {
+  //       var serviceManager = GrpcServiceManager();
+  //       var chargePointRequest = await serviceManager.getAllChargePoints();
+  //       _chargePoints = chargePointRequest.chargePoints;
+  //       print('he pedido');
+  //     }
+  //   });
+  //   print('Salgo con ${_chargePoints!.length}');
+  //   return _chargePoints!;
+  // }
   
-  List<TableRow> getTableRows() {
-    if (_tableRows.isEmpty){
-      getChargePointsTable();
-    }
-    return _tableRows;
-  }
-  
-  set chargePoints(List<ChargePoint> map) {
-    
-  }
 
-  void getChargePointsTable() async {
-    var chargePointList = await getChargePoints();
-    print('he llamado desde get tables');
-    _tableRows.clear();
+  List<TableRow> getChargePointsTable() {
+    if (chargePoints == null) return [];
+    List<TableRow> tableRows = [];
+    tableRows.clear();
     var i = 0;
-    for (i = 0; i + 2 < chargePointList.length; i += 3) {
-      _tableRows.add(TableRow(children: [
+    for (i = 0; i + 2 < chargePoints!.length; i += 3) {
+      tableRows.add(TableRow(children: [
         ChargePointButton(
-            available: chargePointList[i].available,
-            name: chargePointList[i].id),
+            available: chargePoints![i].available,
+            name: chargePoints![i].id),
         ChargePointButton(
-            available: chargePointList[i + 1].available,
-            name: chargePointList[i + 1].id),
+            available: chargePoints![i + 1].available,
+            name: chargePoints![i + 1].id),
         ChargePointButton(
-            available: chargePointList[i + 2].available,
-            name: chargePointList[i + 2].id),
+            available: chargePoints![i + 2].available,
+            name: chargePoints![i + 2].id),
       ]));
     }
-    _tableRows.add(TableRow(children: [
+    tableRows.add(TableRow(children: [
       Visibility(
-        visible: i < chargePointList.length,
+        visible: i < chargePoints!.length,
         maintainSize: true,
         maintainAnimation: true,
         maintainState: true,
         child: ChargePointButton(
-              available: i < chargePointList.length
-                ? chargePointList[i].available
+              available: i < chargePoints!.length
+                ? chargePoints![i].available
                 : false,
-              name: chargePointList[i].id),
+              name: chargePoints![i].id),
       ),
       Visibility(
-        visible: i + 1 < chargePointList.length,
+        visible: i + 1 < chargePoints!.length,
         maintainSize: true,
         maintainAnimation: true,
         maintainState: true,
         child: ChargePointButton(
-              available: i + 1 < chargePointList.length
-                ? chargePointList[i + 1].available
+              available: i + 1 < chargePoints!.length
+                ? chargePoints![i + 1].available
                 : false,
-              name: chargePointList[i + 1].id),
+              name: chargePoints![i + 1].id),
       ),
       const Visibility(
         visible: false,
@@ -88,6 +81,6 @@ class ChargePointProvider extends ChangeNotifier {
       ),
     ]));
     
-    notifyListeners();
+    return tableRows;
   }
 }

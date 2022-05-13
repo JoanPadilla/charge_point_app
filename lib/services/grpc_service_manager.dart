@@ -2,6 +2,7 @@ import 'package:charge_point_app/services/generated/charge_point.pbgrpc.dart';
 import 'package:charge_point_app/services/generated/incidence.pbgrpc.dart';
 import 'package:charge_point_app/services/generated/recharge.pbgrpc.dart';
 import 'package:charge_point_app/services/generated/user.pbgrpc.dart';
+import 'package:charge_point_app/services/interceptors/authentication_interceptor.dart';
 import 'package:grpc/grpc.dart';
 
 class GrpcServiceManager {
@@ -32,9 +33,10 @@ class GrpcServiceManager {
         // TODO: Handle this case.
         break;
       case Environment.PROD:
+        print('hellegado');
         chargePointServiceStub = ChargePointServiceClient(channel);
         incidenceServiceStub = IncidenceServiceClient(channel);
-        rechargesServiceStub = RechargesServiceClient(channel);
+        rechargesServiceStub = RechargesServiceClient(channel, interceptors: [AuthenticationInterceptor()]);
         userServiceStub = UserServiceClient(channel);
         break;
     }
@@ -58,6 +60,7 @@ class GrpcServiceManager {
   }
 
   ResponseFuture<RechargeSet> getHistory() {
+    print('hellegadometodo');
     return rechargesServiceStub.getHistory(EmptyHistoryRequest());
   }
 

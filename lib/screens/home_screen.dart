@@ -1,5 +1,6 @@
 import 'package:charge_point_app/providers/charge_point_provider.dart';
 import 'package:charge_point_app/providers/providers.dart';
+import 'package:charge_point_app/share_preference/user_data.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -28,10 +29,7 @@ class HomeScreen extends StatelessWidget {
                         Provider.of<NotificationsProvider>(context,
                             listen: false);
                     notificationsProvider.closeNotifications();
-                    UserProvider userProvider =
-                        Provider.of<UserProvider>(context,
-                            listen: false);
-                    if (userProvider.token == null){
+                    if (UserData.token == null){
                       showDialog(
                         context: context,
                         builder: (context) => const CustomLoginDialog(),
@@ -155,7 +153,7 @@ class _CustomTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final chargePointProvider = Provider.of<ChargePointProvider>(context);
-    return chargePointProvider.getTableRows().isEmpty
+    return chargePointProvider.chargePoints == null
         ? Container(
             margin: const EdgeInsets.only(top: 20),
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
@@ -164,7 +162,7 @@ class _CustomTable extends StatelessWidget {
           )
         : Table(
             defaultColumnWidth: const FixedColumnWidth(120),
-            children: chargePointProvider.getTableRows(),
+            children: chargePointProvider.getChargePointsTable(),
           );
   }
 }

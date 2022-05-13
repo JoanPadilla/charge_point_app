@@ -1,5 +1,6 @@
 import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/routes/app_routes.dart';
+import 'package:charge_point_app/services/generated/charge_point.pb.dart';
 import 'package:charge_point_app/services/grpc_service_manager.dart';
 import 'package:charge_point_app/share_preference/preference.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
@@ -16,7 +17,8 @@ void main() async {
   GrpcServiceManager serviceManager = GrpcServiceManager();
   // serviceManager.init(Environment.DEV);
   serviceManager.init(Environment.PROD);
-    
+  
+  
   debugPaintSizeEnabled = false;
   WidgetsFlutterBinding.ensureInitialized();
   await Preference.init();
@@ -27,6 +29,7 @@ void main() async {
     }
   );
 }
+
 
 class AppState extends StatelessWidget {
   const AppState({ Key? key }) : super(key: key);
@@ -43,7 +46,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: ( _ ) => IncidenceFormProvider(), lazy: false,),
         ChangeNotifierProvider(create: ( _ ) => LoginFormProvider(), lazy: false,),
         ChangeNotifierProvider(create: ( _ ) => ChargePointProvider(), lazy: false,),
-        ChangeNotifierProvider(create: ( _ ) => UserProvider(), lazy: false,),
+        ChangeNotifierProvider(create: ( _ ) => HistoryProvider(), lazy: true,),
       ],
       child: const MyApp(),
     );
@@ -54,8 +57,15 @@ class MyApp extends StatelessWidget {
   
   const MyApp({Key? key}) : super(key: key);
   
+  void loadChargePoints(ChargePointProvider provider) async {
+    ChargePointSet response = await GrpcServiceManager().getAllChargePoints();
+    provider.setChargePointList(response.chargePoints);
+  }
+  
   @override
   Widget build(BuildContext context) {
+    var chargePointProvider = Provider.of<ChargePointProvider>(context, listen: false);
+    loadChargePoints(chargePointProvider);
     PreferenceProvider preference = Provider.of<PreferenceProvider>(context);
     return GetMaterialApp(
       translations: LocalString(),

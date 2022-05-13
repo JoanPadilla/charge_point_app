@@ -1,12 +1,11 @@
 import 'package:charge_point_app/services/generated/user.pb.dart';
 import 'package:charge_point_app/services/grpc_service_manager.dart';
-import 'package:flutter/material.dart';
+import 'package:charge_point_app/share_preference/user_data.dart';
 
-class UserProvider extends ChangeNotifier {
+
+class UserService {
   
-  String? token;
-  
-  Future<bool> login(String email, String password) async {
+  static Future<bool> login(String email, String password) async {
     var serviceManager = GrpcServiceManager();
     LoginResponse response;
     try {
@@ -15,7 +14,7 @@ class UserProvider extends ChangeNotifier {
       return false;
     }
     
-    token = response.token;
+    UserData.token = response.token;
     return true;
   }
   
