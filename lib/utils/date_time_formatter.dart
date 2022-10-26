@@ -1,4 +1,4 @@
-import 'package:charge_point_app/services/generated/google/protobuf/timestamp.pb.dart';
+import 'package:charge_point_app/services/grpc/generated/google/protobuf/timestamp.pb.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeFormatter {

@@ -1,6 +1,6 @@
-import 'package:charge_point_app/services/generated/recharge.pbgrpc.dart';
-import 'package:charge_point_app/services/grpc_service_manager.dart';
+import 'package:charge_point_app/services/grpc/generated/recharge.pbgrpc.dart';
 import 'package:flutter/material.dart';
+import '../services/grpc/grpc_manager/grpc_service_manager.dart';
 
 
 class HistoryProvider extends ChangeNotifier {

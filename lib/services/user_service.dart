@@ -1,6 +1,6 @@
-import 'package:charge_point_app/services/generated/user.pb.dart';
-import 'package:charge_point_app/services/grpc_service_manager.dart';
+import 'package:charge_point_app/services/grpc/generated/user.pb.dart';
 import 'package:charge_point_app/share_preference/user_data.dart';
+import 'grpc/grpc_manager/grpc_service_manager.dart';
 
 
 class UserService {

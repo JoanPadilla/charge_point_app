@@ -1,7 +1,8 @@
 import 'package:charge_point_app/providers/providers.dart';
 import 'package:charge_point_app/routes/app_routes.dart';
-import 'package:charge_point_app/services/generated/charge_point.pb.dart';
-import 'package:charge_point_app/services/grpc_service_manager.dart';
+import 'package:charge_point_app/services/grpc/generated/charge_point.pb.dart';
+import 'package:charge_point_app/services/grpc/grpc_manager/grpc_service_manager.dart';
+
 import 'package:charge_point_app/share_preference/preference.dart';
 import 'package:charge_point_app/themes/app_theme.dart';
 import 'package:charge_point_app/share_preference/local_string.dart';
@@ -14,9 +15,9 @@ import 'package:provider/provider.dart';
 
 void main() async {
   
-  GrpcServiceManager serviceManager = GrpcServiceManager();
-  // serviceManager.init(Environment.DEV);
-  serviceManager.init(Environment.PROD);
+  // Environment env = Environment.DEV;
+  Environment env = Environment.PROD;
+  GrpcServiceManager serviceManager = GrpcServiceManager(environment: env);
   
   
   debugPaintSizeEnabled = false;
