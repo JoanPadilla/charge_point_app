@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                         builder: (context) => const CustomLoginDialog(),
                       );
                     } else {
-                      
+                      //TODO: add dialog for already logged user
                     }
                   },
                   icon: const Icon(

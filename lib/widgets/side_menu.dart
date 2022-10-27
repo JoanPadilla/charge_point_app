@@ -28,6 +28,10 @@ class CustomSideMenu extends StatelessWidget {
                 if (ModalRoute.of(context)!.settings.name == menuOption.route){
                   Navigator.pop(context);
                 }
+                //TODO test for menu option with no need of authentication
+                else if (!menuOption.authNeeded) {
+                  Navigator.pushReplacementNamed(context, menuOption.route);
+                }
                 else if (menuOption.authNeeded && UserData.token != null) {
                   Navigator.pushReplacementNamed(context, menuOption.route);
                 }
