@@ -1,10 +1,10 @@
 # charge_point_app
 
-This repository is part of a end-of-degree project which consists of designing and implementing a recharging platform for electric vehicles. More specifically, this is the code corresponding to a mobile application made with **Dart** and its framework **Flutter**. The communication in between subsystems is implemented with **GRPC**, therefore, the repository contains a list of some **Protobuf** files containing entities (and some functions) belonging not only to the app but the entire platform.
+This repository is part of an end-of-degree project which consists of designing and implementing a recharging platform for electric vehicles. More specifically, this is the code corresponding to a mobile application made with **Dart** and its framework **Flutter**. The communication between subsystems is implemented with **GRPC**. Therefore, the repository contains a list of some **Protobuf** files containing entities (and some functions) belonging not only to the app but the entire platform.
 
 <img src="https://user-images.githubusercontent.com/46372557/206185716-3a5fb92e-e22d-464f-b373-6ac8c6574b5b.PNG" width="450" />
 
-The application is aimed at customers subscribed in the platform service. It allows its users to manage their recharges and check the current status of all charging points in the network. The interface is composed of many different screens with some pop-up windows and other different widgets.
+The application is aimed at customers subscribed to the platform service. It allows its users to manage their recharges and check the current status of all charging points in the network. The interface is composed of many different screens with some pop-up windows and other different widgets.
 
 
 <p float="left">
