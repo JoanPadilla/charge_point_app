@@ -1,5 +1,4 @@
 import 'package:charge_point_app/services/grpc/generated/charge_point.pb.dart';
-import 'package:charge_point_app/services/grpc_service_manager.dart';
 import 'package:charge_point_app/widgets/charge_point_button.dart';
 import 'package:flutter/material.dart';
 import 'package:synchronized/synchronized.dart';

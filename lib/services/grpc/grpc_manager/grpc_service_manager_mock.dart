@@ -12,14 +12,19 @@ import 'package:grpc/grpc.dart';
 class GrpcServiceManagerMock implements GrpcServiceManager {
 
   @override
-  void init() {}
-
-  GrpcServiceManagerMock() {
+  void init() {
+    channel = ClientChannel('10.0.2.2',
+        port: 8080,
+        options:
+            const ChannelOptions(credentials: ChannelCredentials.insecure()));
+    
     chargePointServiceStub = ChargePointServiceClient(channel);
     incidenceServiceStub = IncidenceServiceClient(channel);
     rechargesServiceStub = RechargesServiceClient(channel, interceptors: []);
     userServiceStub = UserServiceClient(channel);
   }
+
+  GrpcServiceManagerMock();
 
   @override
   Future<ChargePointSet> getAllChargePoints() {

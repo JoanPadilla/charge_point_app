@@ -15,9 +15,10 @@ import 'package:provider/provider.dart';
 
 void main() async {
   
-  // Environment env = Environment.DEV;
-  Environment env = Environment.PROD;
+  Environment env = Environment.DEV;
+  // Environment env = Environment.PROD;
   GrpcServiceManager serviceManager = GrpcServiceManager(environment: env);
+  serviceManager.init();
   
   
   debugPaintSizeEnabled = false;
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
   
   void loadChargePoints(ChargePointProvider provider) async {
     ChargePointSet response = await GrpcServiceManager().getAllChargePoints();
-    provider.setChargePointList(response.chargePoints);
+    provider.setChargePointList(response.chargePoints.toList());
   }
   
   @override
